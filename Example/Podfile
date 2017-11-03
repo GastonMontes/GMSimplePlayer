@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GMSimplePlayer_Example' do
+  pod 'GMSimplePlayer', :path => '../'
+
+  target 'GMSimplePlayer_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
