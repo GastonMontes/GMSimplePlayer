@@ -22,8 +22,8 @@ pod 'GMSimplePlayer'
 
 ## Author
 
-gastonmontes@hotmail.com, gmontes@tbxnet.com
+Gaston Montes, gastonmontes@hotmail.com
 
 ## License
 
-GMSimplePlayer is available under the MIT license. See the LICENSE file for more info.
+GMSimplePlayer is available under the BSD license. See the LICENSE file for more info.
