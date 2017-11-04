@@ -111,7 +111,7 @@ private let kPlayerSliderImageSize = Float(16)
         }
     }
     
-    @IBInspectable private var timerControls: Double = kPlayerHideBarsAfterSeconds
+    @IBInspectable private var timerBarHidden: Double = kPlayerHideBarsAfterSeconds
     @IBInspectable private var timerAnimation: Double = kPlayerHideBarsAnimationDuration
     @IBInspectable private var timerSeek: Int = kPlayerSeekingSeconds
     
@@ -207,7 +207,7 @@ private let kPlayerSliderImageSize = Float(16)
                 self.hideTopAndBottomViews()
             }
         })
-        self.playerDispatcher.dispatcherDispatch(after: self.timerControls)
+        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     // MARK: - View functions.
@@ -241,7 +241,7 @@ private let kPlayerSliderImageSize = Float(16)
             self.layoutIfNeeded()
             }, completion: { finished in
                 self.playerViewTopBottomViewAreHidden = false
-                self.playerDispatcher.dispatcherDispatch(after: self.timerControls)
+                self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
         })
     }
     
@@ -312,7 +312,7 @@ private let kPlayerSliderImageSize = Float(16)
             self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
         }
         
-        self.playerDispatcher.dispatcherDispatch(after: self.timerControls)
+        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     private func controlSeek(addingSeconds: Int) {
@@ -322,7 +322,7 @@ private let kPlayerSliderImageSize = Float(16)
         let playerForwardTime = playerCurrentTime + Float64(addingSeconds)
         
         self.player.seek(to: CMTimeMakeWithSeconds(playerForwardTime, 100), completionHandler: { [unowned self] completed in
-            self.playerDispatcher.dispatcherDispatch(after: self.timerControls)
+            self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
         })
     }
     
@@ -394,6 +394,6 @@ private let kPlayerSliderImageSize = Float(16)
         
         self.controlSeek(addingSeconds: timeSelected - currentTime)
         self.player.play()
-        self.playerDispatcher.dispatcherDispatch(after: self.timerControls)
+        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
     }
 }
