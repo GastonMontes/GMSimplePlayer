@@ -6,8 +6,24 @@
 [![License](https://img.shields.io/cocoapods/l/GMSimplePlayer.svg?style=flat)](http://cocoapods.org/pods/GMSimplePlayer)
 [![Platform](https://img.shields.io/cocoapods/p/GMSimplePlayer.svg?style=flat)](http://cocoapods.org/pods/GMSimplePlayer)
 
-GMSimplePLayer is a customizable view player. You can customize It via code or via Interface Builder. 
-To use It you can create an instance with Its initializer or just add a GMPlayer view to your .xib file.
+## Description
+
+GMSimplePLayer is a customizable view player. You can customize It styling via code or via Interface Builder. 
+To use It you can create an instance with It's initializer or just add a GMPlayer view to your .xib file.
+If you do not want to customize the Player don't worry! The GMPlayer has a basic styling.
+
+You can customize:
+- Player tint color (Background).
+- Player Bars tint color.
+- Player Controls tint colors (Buttons).
+- Player controls bar height.
+- Player top bar height (Navigation bar).
+- Player bar hidden time.
+- Player bar hidden animation time.
+- Player seek time (fowward and back).
+- Player images (play, pause, seek forward, seek back, previous, next and slider).
+- Player slider image size (If base dot image selected, dot size can be configured).
+
 
 ## Example
 
