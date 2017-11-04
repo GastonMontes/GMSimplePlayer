@@ -28,10 +28,11 @@ You can customize:
 ## Example
 
 To run the example project, follow these steps:
-1 - clone the repo: `git clone https://github.com/GastonMontes/GMSimplePlayer.git`.
-2 - Change to Example folder: `cd GMSimplePlayer/Example/`.
-3 - Install pods: `pod install`.
-4 - Open Workspace: `open GMSimplePlayer.xcworkspace`.
+
+- 1 - clone the repo: `git clone https://github.com/GastonMontes/GMSimplePlayer.git`.
+- 2 - Change to Example folder: `cd GMSimplePlayer/Example/`.
+- 3 - Install pods: `pod install`.
+- 4 - Open Workspace: `open GMSimplePlayer.xcworkspace`.
 
 ## Requirements
 
