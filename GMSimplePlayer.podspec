@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/ElgatitoMontes'
   s.ios.deployment_target = '9.0'
   s.source_files = 'GMSimplePlayer/Classes/**/*'
+  s.resource_bundles = { 'GMSimplePlayer' => ['GMSimplePlayer/Assets/*.xcassets'] }
 end

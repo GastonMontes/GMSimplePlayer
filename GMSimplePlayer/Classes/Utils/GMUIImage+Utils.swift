@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    class func image(name: String) -> UIImage {
+        let bundle = Bundle.bundleForPod()
+        return UIImage(named: name, in: bundle, compatibleWith: nil)!
+    }
+    
     class func imageDot(size: Float, color: UIColor) -> UIImage {
         let sizeFloat = CGFloat(size)
         

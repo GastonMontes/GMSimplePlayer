@@ -25,7 +25,7 @@ private let kPlayerTimeFormarMinutesSeconds = "%02i:%02i"
 private let kPlayerSliderMaximumTintColorAlpha = CGFloat(0.4)
 private let kPlayerSliderImageSize = Float(16)
 
-@IBDesignable class GMPlayer: UIView {
+@IBDesignable public class GMPlayer: UIView {
     // MARK: - Vars.
     private var playerView: UIView!
     private var playerViewTopBottomViewAreHidden = false
@@ -115,33 +115,33 @@ private let kPlayerSliderImageSize = Float(16)
     @IBInspectable private var timerAnimation: Double = kPlayerHideBarsAnimationDuration
     @IBInspectable private var timerSeek: Int = kPlayerSeekingSeconds
     
-    @IBInspectable private var imagePlay: UIImage = #imageLiteral(resourceName: "PlayerPlay")
+    @IBInspectable private var imagePlay: UIImage = UIImage.image(name: "PlayerPlay")
     
-    @IBInspectable private var imagePause: UIImage = #imageLiteral(resourceName: "PlayerPause") {
+    @IBInspectable private var imagePause: UIImage = UIImage.image(name: "PlayerPause") {
         didSet {
             self.playerPlayPauseButton?.setImage(imagePause, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageForward: UIImage = #imageLiteral(resourceName: "PlayerSeekForward") {
+    @IBInspectable private var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
         didSet {
             self.playerSeekForwardButton?.setImage(imageForward, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageBack: UIImage = #imageLiteral(resourceName: "PlayerSeekBackward") {
+    @IBInspectable private var imageBack: UIImage = UIImage.image(name: "PlayerSeekBackward") {
         didSet {
             self.playerSeekBackwardButton?.setImage(imageBack, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imagePrevious: UIImage = #imageLiteral(resourceName: "PlayerPrevious") {
+    @IBInspectable private var imagePrevious: UIImage = UIImage.image(name: "PlayerPrevious") {
         didSet {
             self.playerPreviousButton?.setImage(imagePrevious, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageNext: UIImage = #imageLiteral(resourceName: "PlayerNext") {
+    @IBInspectable private var imageNext: UIImage = UIImage.image(name: "PlayerNext") {
         didSet {
             self.playerNextButton?.setImage(imageNext, for: UIControlState.normal)
         }
@@ -168,7 +168,7 @@ private let kPlayerSliderImageSize = Float(16)
         initializeViews()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
@@ -180,20 +180,20 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     // MARK: - View life cycle.
-    override func layoutSublayers(of layer: CALayer) {
+    public override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         
         self.playerLayer.frame = self.playerView.bounds
     }
     
-    override func prepareForInterfaceBuilder() {
+    public override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         self.playerView.prepareForInterfaceBuilder()
         
         self.initializeViews()
     }
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         
         self.insertPlayerInView()
@@ -212,7 +212,7 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - View functions.
     private func loadView() {
-        self.playerView = Bundle.main.bundleLoadViewFromNib(nibName: String(describing: type(of: self)), nibOwner: self)
+        self.playerView = Bundle.bundleForPod().bundleLoadViewFromNib(nibName: String(describing: type(of: self)), nibOwner: self)
         self.playerView.frame = self.bounds
         self.addSubview(self.playerView)
         
@@ -264,7 +264,7 @@ private let kPlayerSliderImageSize = Float(16)
         self.player.addObserver(self, forKeyPath: "status", options: .new, context: nil)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" { self.playerHandlerStatusChanged() }
     }
     
@@ -276,7 +276,7 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
     }
     
-    func playerPlay(withURLString urlString: String) {
+    public func playerPlay(withURLString urlString: String) {
         let videoURL = URL(string: urlString)
         let playerItem = AVPlayerItem(url: videoURL!)
         self.player.replaceCurrentItem(with: playerItem)

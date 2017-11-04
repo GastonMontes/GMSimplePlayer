@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		41EC894853E0805A90BC9293 /* Pods_GMSimplePlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */; };
+		ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */; };
+		ABB046411FAD3A0400D4E220 /* GMVideoOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */; };
+		ABB046431FAD3A3000D4E220 /* GMVideoOptionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */; };
+		ABB046451FAD3A8C00D4E220 /* GMVideoOptionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */; };
 		B4783C08F95F7CE50B5B19E0 /* Pods_GMSimplePlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892F1BA72846810578AF797D /* Pods_GMSimplePlayer_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,11 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0501C782CA05A8F94ECC50AF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0501C782CA05A8F94ECC50AF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GMSimplePlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMSimplePlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -40,12 +43,17 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		69F78AFF112BD67AC41C86F9 /* Pods-GMSimplePlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Tests/Pods-GMSimplePlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		73CEEBAE8BBB40ADE3047CFA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		73CEEBAE8BBB40ADE3047CFA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		779563B8F79356C84CC55538 /* Pods-GMSimplePlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Tests/Pods-GMSimplePlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		892F1BA72846810578AF797D /* Pods_GMSimplePlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMSimplePlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMSimplePlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A05D69513359F632CC3AA846 /* Pods-GMSimplePlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Example/Pods-GMSimplePlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B8A4D97216BD735EFA36AA7A /* GMSimplePlayer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = GMSimplePlayer.podspec; path = ../GMSimplePlayer.podspec; sourceTree = "<group>"; };
+		ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPlayerViewController.swift; sourceTree = "<group>"; };
+		ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoSelectionViewController.swift; sourceTree = "<group>"; };
+		ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoOption.swift; sourceTree = "<group>"; };
+		ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoOptionDatasource.swift; sourceTree = "<group>"; };
+		ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GMVideoOptionList.plist; sourceTree = "<group>"; };
+		B8A4D97216BD735EFA36AA7A /* GMSimplePlayer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GMSimplePlayer.podspec; path = ../GMSimplePlayer.podspec; sourceTree = "<group>"; };
 		BE1653ABA965461E8A4C90EC /* Pods-GMSimplePlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Example/Pods-GMSimplePlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,8 +112,9 @@
 		607FACD21AFB9204008FA782 /* Example for GMSimplePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				ABB0463F1FAD39E100D4E220 /* Player */,
+				ABB0463E1FAD39C200D4E220 /* VideoSelection */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -157,6 +166,25 @@
 				9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABB0463E1FAD39C200D4E220 /* VideoSelection */ = {
+			isa = PBXGroup;
+			children = (
+				ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */,
+				ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */,
+				ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */,
+				ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */,
+			);
+			name = VideoSelection;
+			sourceTree = "<group>";
+		};
+		ABB0463F1FAD39E100D4E220 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,10 +243,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = QA4C99JM3E;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = QA4C99JM3E;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -249,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				ABB046451FAD3A8C00D4E220 /* GMVideoOptionList.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -370,8 +401,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				ABB046411FAD3A0400D4E220 /* GMVideoOption.swift in Sources */,
+				ABB046431FAD3A3000D4E220 /* GMVideoOptionDatasource.swift in Sources */,
+				ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +492,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -504,7 +538,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -517,6 +551,7 @@
 			baseConfigurationReference = BE1653ABA965461E8A4C90EC /* Pods-GMSimplePlayer_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QA4C99JM3E;
 				INFOPLIST_FILE = GMSimplePlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -532,6 +567,7 @@
 			baseConfigurationReference = A05D69513359F632CC3AA846 /* Pods-GMSimplePlayer_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QA4C99JM3E;
 				INFOPLIST_FILE = GMSimplePlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -546,6 +582,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69F78AFF112BD67AC41C86F9 /* Pods-GMSimplePlayer_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = QA4C99JM3E;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -567,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 779563B8F79356C84CC55538 /* Pods-GMSimplePlayer_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = QA4C99JM3E;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
