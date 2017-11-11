@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		41EC894853E0805A90BC9293 /* Pods_GMSimplePlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */; };
 		ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */; };
 		ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */; };
 		ABB046411FAD3A0400D4E220 /* GMVideoOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */; };
@@ -36,7 +36,6 @@
 		607FACD01AFB9204008FA782 /* GMSimplePlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMSimplePlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* GMSimplePlayer_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMSimplePlayer_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +47,7 @@
 		892F1BA72846810578AF797D /* Pods_GMSimplePlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMSimplePlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMSimplePlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A05D69513359F632CC3AA846 /* Pods-GMSimplePlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Example/Pods-GMSimplePlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
+		AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GMVideoSelectionViewController.xib; sourceTree = "<group>"; };
 		ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPlayerViewController.swift; sourceTree = "<group>"; };
 		ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoSelectionViewController.swift; sourceTree = "<group>"; };
 		ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoOption.swift; sourceTree = "<group>"; };
@@ -115,7 +115,6 @@
 				ABB0463F1FAD39E100D4E220 /* Player */,
 				ABB0463E1FAD39C200D4E220 /* VideoSelection */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -172,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */,
+				AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */,
 				ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */,
 				ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */,
 				ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */,
@@ -278,10 +278,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				ABB046451FAD3A8C00D4E220 /* GMVideoOptionList.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,14 +428,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDA1AFB9204008FA782 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

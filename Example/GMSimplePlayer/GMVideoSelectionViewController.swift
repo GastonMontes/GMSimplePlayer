@@ -12,8 +12,6 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: - Vars.
     @IBOutlet weak var configurationTableView: UITableView?
     
-    private var selectedVideoURL: String?
-    
     private var configurationDatasource: GMVideoOptionDatasource?
     
     // MARk: - View life cycle.
@@ -33,13 +31,5 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedVideoURL = self.configurationDatasource!.datasourceOptions[indexPath.row].optionURL
-        self.performSegue(withIdentifier: "videoSelected", sender: self)
-    }
-    
-    // MARK: - Segue functions.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let player = segue.destination as! GMPlayerViewController
-        player.playerItemURL = self.selectedVideoURL!
     }
 }
