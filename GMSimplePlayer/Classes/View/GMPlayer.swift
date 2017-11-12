@@ -294,8 +294,17 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "status" { self.playerHandlerStatusChanged() }
-        if keyPath == "currentItem" { self.currentItemChanged() }
+        if let path = keyPath {
+            switch path {
+            case "status":
+                self.playerHandlerStatusChanged()
+            case "currentItem":
+                self.playerCurrentItemIndex += 1
+                self.currentItemChanged()
+            default:
+                print("Unused KVO key path")
+            }
+        }
     }
     
     private func playerAddTimeObserver() {
@@ -353,7 +362,7 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     @IBAction private func controlNextAction() {
-        // TODO: Gaston - Ver como implementar esto.
+        self.player.advanceToNextItem()
     }
     
     @IBAction private func controlPreviousAction() {
@@ -420,6 +429,8 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - Video & audio item functions.
     private func configureView(forItem item: GMPlayerItemProtocol) {
+        self.playerImageView?.isHidden = true
+        
         if let audioItem = item as? GMPlayerItemAudio {
             self.configureViewForAudio(audioItem: audioItem)
         } else if let videoItem = item as? GMPlayerItemVideo {
@@ -449,7 +460,9 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - Items functions.
     private func currentItemChanged() {
+        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1
         self.timeSliderSetDuration()
+        self.configureView(forItem: self.playerItems[self.playerCurrentItemIndex])
     }
     
     private func loadItems(items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
