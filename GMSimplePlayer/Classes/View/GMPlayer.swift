@@ -29,7 +29,7 @@ private let kPlayerSliderImageSize = Float(16)
     // MARK: - Vars.
     private var playerView: UIView!
     private var playerViewTopBottomViewAreHidden = false
-    private var playerDispatcher: GMDispatcher!
+    private var playerDispatcher: GMDispatcher?
     
     private var player: AVPlayer!
     private var playerLayer: AVPlayerLayer!
@@ -158,7 +158,7 @@ private let kPlayerSliderImageSize = Float(16)
     // MARK: - Initialization.
     private func initializeViews() {
         self.loadView()
-        self.createDispatcher()
+        self.createPlayer()
     }
     
     override init(frame: CGRect) {
@@ -206,7 +206,7 @@ private let kPlayerSliderImageSize = Float(16)
                 self.hideTopAndBottomViews()
             }
         })
-        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
+        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     // MARK: - View functions.
@@ -218,9 +218,20 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView.constraintsSizeSameAsSuperview()
     }
     
+    private func createPlayer() {
+        self.player = AVPlayer()
+        
+        self.playerAddKVOs()
+        
+        self.playerLayer = AVPlayerLayer(player: self.player)
+        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
+        
+        self.playerAddTimeObserver()
+    }
+    
     // MARK: - Top and bottom views functions.
     private func hideTopAndBottomViews() {
-        self.playerDispatcher.dispatcherStop()
+        self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
             self.playerTopViewTopMarginConstraint?.constant = -self.playerTopView!.frameHeight()
@@ -232,7 +243,7 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     private func showTopAndBottomViews() {
-        self.playerDispatcher.dispatcherStop()
+        self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
             self.playerTopViewTopMarginConstraint?.constant = 0
@@ -240,7 +251,7 @@ private let kPlayerSliderImageSize = Float(16)
             self.layoutIfNeeded()
             }, completion: { finished in
                 self.playerViewTopBottomViewAreHidden = false
-                self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
+                self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
         })
     }
     
@@ -285,7 +296,7 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - Controls actions.
     @IBAction private func controlPlayPauseAction() {
-        self.playerDispatcher.dispatcherStop()
+        self.playerDispatcher?.dispatcherStop()
         
         if self.player.rate > 0 {
             self.player.pause()
@@ -295,17 +306,17 @@ private let kPlayerSliderImageSize = Float(16)
             self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
         }
         
-        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
+        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     private func controlSeek(addingSeconds: Int) {
-        self.playerDispatcher.dispatcherStop()
+        self.playerDispatcher?.dispatcherStop()
         
         let playerCurrentTime = CMTimeGetSeconds(self.player.currentTime())
         let playerForwardTime = playerCurrentTime + Float64(addingSeconds)
         
         self.player.seek(to: CMTimeMakeWithSeconds(playerForwardTime, 100), completionHandler: { [unowned self] completed in
-            self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
+            self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
         })
     }
     
@@ -367,7 +378,7 @@ private let kPlayerSliderImageSize = Float(16)
     
     @IBAction func timeSliderEditionBegins(slider: UISlider) {
         self.player.pause()
-        self.playerDispatcher.dispatcherStop()
+        self.playerDispatcher?.dispatcherStop()
     }
     
     @IBAction func timeSliderEditionEnds(slider: UISlider) {
@@ -377,35 +388,20 @@ private let kPlayerSliderImageSize = Float(16)
         
         self.controlSeek(addingSeconds: timeSelected - currentTime)
         self.player.play()
-        self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
+        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     // MARK: - Play functions.
     public func playerPlay(item: GMPlayerItemProtocol) {
-        if let videoItem = item as? GMPlayerItemVideo {
-            self.playVideo(item: videoItem)
-        } else {
-            let audioItem = item as! GMPlayerItemAudio
-            self.playAudio(item: audioItem)
-        }
-    }
-    
-    // MARK: - Video functions.
-    private func playVideo(item: GMPlayerItemVideo) {
-        self.player = AVPlayer()
-        self.playerAddKVOs()
-        
-        self.playerLayer = AVPlayerLayer(player: self.player)
-        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
-        
         let playerItem = AVPlayerItem(url: item.playerItemURL())
+        
         self.player.replaceCurrentItem(with: playerItem)
         self.player.play()
-        self.playerAddTimeObserver()
-    }
-    
-    // MARK: - Audio functions.
-    func playAudio(item: GMPlayerItemAudio) {
         
+        if let audioItem = item as? GMPlayerItemAudio {
+            self.playerDispatcher = nil
+        } else {
+            self.createDispatcher()
+        }
     }
 }

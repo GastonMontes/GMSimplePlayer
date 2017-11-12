@@ -17,6 +17,7 @@
 		AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DA51FB7D03A000E8131 /* GMOption.swift */; };
 		AB0C2DAC1FB7F89A000E8131 /* GMOptionVideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */; };
 		AB0C2DAE1FB7F941000E8131 /* GMOptionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */; };
+		AB0C2DB11FB807F0000E8131 /* GMOptionAudioURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DB01FB807F0000E8131 /* GMOptionAudioURL.swift */; };
 		ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */; };
 		ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */; };
 		ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */; };
@@ -55,6 +56,7 @@
 		AB0C2DA51FB7D03A000E8131 /* GMOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOption.swift; sourceTree = "<group>"; };
 		AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionVideoURL.swift; sourceTree = "<group>"; };
 		AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionFactory.swift; sourceTree = "<group>"; };
+		AB0C2DB01FB807F0000E8131 /* GMOptionAudioURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionAudioURL.swift; sourceTree = "<group>"; };
 		ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPlayerViewController.swift; sourceTree = "<group>"; };
 		ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoSelectionViewController.swift; sourceTree = "<group>"; };
 		ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionDatasource.swift; sourceTree = "<group>"; };
@@ -178,9 +180,10 @@
 			isa = PBXGroup;
 			children = (
 				ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */,
+				AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */,
 				AB0C2DA51FB7D03A000E8131 /* GMOption.swift */,
 				AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */,
-				AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */,
+				AB0C2DB01FB807F0000E8131 /* GMOptionAudioURL.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				AB0C2DAC1FB7F89A000E8131 /* GMOptionVideoURL.swift in Sources */,
 				AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */,
 				ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */,
+				AB0C2DB11FB807F0000E8131 /* GMOptionAudioURL.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */,
 				AB0C2DAE1FB7F941000E8131 /* GMOptionFactory.swift in Sources */,
