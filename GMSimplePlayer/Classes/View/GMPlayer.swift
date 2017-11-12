@@ -226,19 +226,6 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView.constraintsSizeSameAsSuperview()
     }
     
-    private func createPlayer(items: [AVPlayerItem]) {
-        self.player = AVQueuePlayer(items: items)
-        
-        self.playerAddKVOs()
-        
-        self.playerLayer = AVPlayerLayer(player: self.player)
-        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
-        
-        self.playerAddTimeObserver()
-        
-        self.playerLayer.frame = self.playerView.bounds
-    }
-    
     // MARK: - Top and bottom views functions.
     private func hideTopAndBottomViews() {
         guard self.timerBarHidden > 0 else {
@@ -300,6 +287,8 @@ private let kPlayerSliderImageSize = Float(16)
                 self.playerHandlerStatusChanged()
             case "currentItem":
                 self.playerCurrentItemIndex += 1
+                print("Se aumento playerCurrentItemIndex en 1 y quedo: \(self.playerCurrentItemIndex)")
+                
                 self.currentItemChanged()
             default:
                 print("Unused KVO key path")
@@ -366,7 +355,11 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     @IBAction private func controlPreviousAction() {
-        self.controlSeek(addingSeconds: -Int(CMTimeGetSeconds(self.player.currentTime())))
+        if Int(CMTimeGetSeconds(self.player.currentTime())) >= 1 {
+            self.controlSeek(addingSeconds: -Int(CMTimeGetSeconds(self.player.currentTime())))
+        } else {
+            self.previousItemSelected()
+        }
     }
     
     // MARK: - Time slider functions.
@@ -382,6 +375,10 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     private func timeSliderSetDuration() {
+        guard self.player.currentItem != nil else {
+            return
+        }
+        
         let duration = Int(CMTimeGetSeconds(self.player.currentItem!.asset.duration))
         let hours = duration / kPlayerSecondsPerHour
         let minutes = (duration - kPlayerMinutesPerHour * hours) / kPlayerSecondsPerMinute
@@ -458,10 +455,44 @@ private let kPlayerSliderImageSize = Float(16)
         })
     }
     
+    // MARK: - Player functions.
+    private func createPlayer(items: [AVPlayerItem]) {
+        self.player = AVQueuePlayer(items: items)
+        
+        self.playerAddKVOs()
+        
+        self.playerLayer = AVPlayerLayer(player: self.player)
+        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
+        
+        self.playerAddTimeObserver()
+        
+        self.playerLayer.frame = self.playerView.bounds
+    }
+    
+    private func updatePlayer(items: [AVPlayerItem]) {
+        self.player.removeAllItems()
+        
+        var currentItem: AVPlayerItem?
+        
+        for item in items {
+            if self.player.canInsert(item, after: currentItem) {
+                self.player.insert(item, after: currentItem)
+                currentItem = item
+            }
+        }
+    }
+    
     // MARK: - Items functions.
     private func currentItemChanged() {
+        guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItems.count else {
+            print("self.playerCurrentItemIndex is out of range")
+            return
+        }
+        
         self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1
         self.timeSliderSetDuration()
+        
+        print("Se llama al configure view con index: \(self.playerCurrentItemIndex)")
         self.configureView(forItem: self.playerItems[self.playerCurrentItemIndex])
     }
     
@@ -473,6 +504,40 @@ private let kPlayerSliderImageSize = Float(16)
         }
         
         return avItems
+    }
+    
+    private func itemsFromIndex(_ index: Int) -> [GMPlayerItemProtocol] {
+        var newItems = [GMPlayerItemProtocol]()
+        
+        var itemIndex = 0
+        
+        for item in self.playerItems {
+            if itemIndex >= self.playerCurrentItemIndex {
+                newItems.append(item)
+            }
+            
+            itemIndex += 1
+        }
+        
+        return newItems
+    }
+    
+    private func previousItemSelected() {
+        guard self.playerCurrentItemIndex > 0 else {
+            return
+        }
+        
+        // NOTE: -2 because KVO currentItem observer functions add 1 to playerCurrentItemIndex and is called twice.
+        // See: observeValue(forKeyPath:, of:, change:, context:)
+        self.playerCurrentItemIndex -= 1
+        print("Se decremento playerCurrentItemIndex en 1 y quedo: \(self.playerCurrentItemIndex)")
+        
+        let newItems = self.itemsFromIndex(self.playerCurrentItemIndex)
+        
+        self.playerCurrentItemIndex -= 2
+        print("Se decremento playerCurrentItemIndex en 2 y quedo: \(self.playerCurrentItemIndex)")
+        
+        self.updatePlayer(items: self.loadItems(items: newItems))
     }
     
     // MARK: - Play functions.
