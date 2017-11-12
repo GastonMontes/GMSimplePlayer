@@ -7,12 +7,13 @@
 //
 
 import Foundation
-private let kConfigurationFileNameKey = "GMVideoOptionList"
+
+private let kConfigurationFileNameKey = "GMOptionList"
 private let kConfigurationFileExtensionKey = "plist"
 
-class GMVideoOptionDatasource {
+class GMOptionDatasource {
     // MARK: - Vars.
-    private(set) var datasourceOptions = Array<GMVideoOption>()
+    private(set) var datasourceOptions = Array<GMOption>()
     
     // MARK: - Initialization.
     init() {
@@ -24,7 +25,7 @@ class GMVideoOptionDatasource {
         if let configurationpList = Bundle.main.path(forResource: kConfigurationFileNameKey, ofType: kConfigurationFileExtensionKey) {
             let configurationList = NSArray(contentsOfFile: configurationpList) as! Array<Dictionary<String, String>>
             for dictionary in configurationList {
-                self.datasourceOptions.append(GMVideoOption(dictionary: dictionary))
+                self.datasourceOptions.append(GMOption(dictionary: dictionary))
             }
         }
     }

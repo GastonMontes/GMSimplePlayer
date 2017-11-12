@@ -7,6 +7,9 @@
 
 import Foundation
 
+public protocol GMPlayerItemProtocol {
+}
+
 public protocol GMPlayerItemResourceVideo {
 }
 

@@ -12,11 +12,11 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: - Vars.
     @IBOutlet weak var configurationTableView: UITableView?
     
-    private var configurationDatasource: GMVideoOptionDatasource?
+    private var configurationDatasource: GMOptionDatasource?
     
     // MARk: - View life cycle.
     override func viewDidLoad() {
-        self.configurationDatasource = GMVideoOptionDatasource()
+        self.configurationDatasource = GMOptionDatasource()
     }
     
     // MARK: - UITableViewDataSource implementation.
@@ -31,5 +31,7 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let playerController = GMPlayerViewController()
+        self.navigationController?.pushViewController(playerController, animated: true)
     }
 }

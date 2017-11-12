@@ -13,11 +13,12 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */; };
+		AB0C2DA21FB7CD46000E8131 /* GMPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */; };
+		AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DA51FB7D03A000E8131 /* GMOption.swift */; };
 		ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */; };
 		ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */; };
-		ABB046411FAD3A0400D4E220 /* GMVideoOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */; };
-		ABB046431FAD3A3000D4E220 /* GMVideoOptionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */; };
-		ABB046451FAD3A8C00D4E220 /* GMVideoOptionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */; };
+		ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */; };
+		ABB046451FAD3A8C00D4E220 /* GMOptionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */; };
 		B4783C08F95F7CE50B5B19E0 /* Pods_GMSimplePlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892F1BA72846810578AF797D /* Pods_GMSimplePlayer_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,11 +49,12 @@
 		9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMSimplePlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A05D69513359F632CC3AA846 /* Pods-GMSimplePlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Example/Pods-GMSimplePlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GMVideoSelectionViewController.xib; sourceTree = "<group>"; };
+		AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GMPlayerViewController.xib; sourceTree = "<group>"; };
+		AB0C2DA51FB7D03A000E8131 /* GMOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOption.swift; sourceTree = "<group>"; };
 		ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPlayerViewController.swift; sourceTree = "<group>"; };
 		ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoSelectionViewController.swift; sourceTree = "<group>"; };
-		ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoOption.swift; sourceTree = "<group>"; };
-		ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoOptionDatasource.swift; sourceTree = "<group>"; };
-		ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GMVideoOptionList.plist; sourceTree = "<group>"; };
+		ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionDatasource.swift; sourceTree = "<group>"; };
+		ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GMOptionList.plist; sourceTree = "<group>"; };
 		B8A4D97216BD735EFA36AA7A /* GMSimplePlayer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GMSimplePlayer.podspec; path = ../GMSimplePlayer.podspec; sourceTree = "<group>"; };
 		BE1653ABA965461E8A4C90EC /* Pods-GMSimplePlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMSimplePlayer_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GMSimplePlayer_Example/Pods-GMSimplePlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,9 +174,9 @@
 			children = (
 				ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */,
 				AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */,
-				ABB046401FAD3A0400D4E220 /* GMVideoOption.swift */,
-				ABB046421FAD3A3000D4E220 /* GMVideoOptionDatasource.swift */,
-				ABB046441FAD3A8C00D4E220 /* GMVideoOptionList.plist */,
+				ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */,
+				ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */,
+				AB0C2DA51FB7D03A000E8131 /* GMOption.swift */,
 			);
 			name = VideoSelection;
 			sourceTree = "<group>";
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */,
+				AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -278,7 +281,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB046451FAD3A8C00D4E220 /* GMVideoOptionList.plist in Resources */,
+				ABB046451FAD3A8C00D4E220 /* GMOptionList.plist in Resources */,
+				AB0C2DA21FB7CD46000E8131 /* GMPlayerViewController.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */,
@@ -401,10 +405,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */,
 				ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				ABB046411FAD3A0400D4E220 /* GMVideoOption.swift in Sources */,
-				ABB046431FAD3A3000D4E220 /* GMVideoOptionDatasource.swift in Sources */,
+				ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */,
 				ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

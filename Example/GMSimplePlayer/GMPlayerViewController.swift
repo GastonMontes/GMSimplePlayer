@@ -25,6 +25,6 @@ class GMPlayerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.playerView?.playerPlay(withURLString: self.playerItemURL!)
+//        self.playerView?.playerPlay(withURLString: self.playerItemURL!)
     }
 }
