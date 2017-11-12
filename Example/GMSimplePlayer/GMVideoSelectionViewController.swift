@@ -45,6 +45,6 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
             playerController = GMPlayerViewController(options: [selectedOption!])
         }
     
-        self.navigationController?.pushViewController(playerController, animated: true)
+        self.navigationController?.present(playerController, animated: true, completion: nil)
     }
 }

@@ -35,6 +35,8 @@ private let kPlayerSliderImageSize = Float(16)
     private var player: AVQueuePlayer!
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
+    private var playerItems = [GMPlayerItemProtocol]()
+    private var playerCurrentItemIndex = Int(0)
     
     private var playerTimeSliderHasCustomImage: Bool = false
     
@@ -161,7 +163,6 @@ private let kPlayerSliderImageSize = Float(16)
     // MARK: - Initialization.
     private func initializeViews() {
         self.loadView()
-        self.createPlayer()
         self.createDispatcher()
     }
     
@@ -186,6 +187,10 @@ private let kPlayerSliderImageSize = Float(16)
     // MARK: - View life cycle.
     public override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
+        
+        guard self.playerLayer != nil else {
+            return
+        }
         
         self.playerLayer.frame = self.playerView.bounds
     }
@@ -221,8 +226,8 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView.constraintsSizeSameAsSuperview()
     }
     
-    private func createPlayer() {
-        self.player = AVQueuePlayer()
+    private func createPlayer(items: [AVPlayerItem]) {
+        self.player = AVQueuePlayer(items: items)
         
         self.playerAddKVOs()
         
@@ -230,6 +235,8 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
         
         self.playerAddTimeObserver()
+        
+        self.playerLayer.frame = self.playerView.bounds
     }
     
     // MARK: - Top and bottom views functions.
@@ -283,10 +290,12 @@ private let kPlayerSliderImageSize = Float(16)
     
     private func playerAddKVOs() {
         self.player.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        self.player.addObserver(self, forKeyPath: "currentItem", options: .new, context: nil)
     }
     
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" { self.playerHandlerStatusChanged() }
+        if keyPath == "currentItem" { self.currentItemChanged() }
     }
     
     private func playerAddTimeObserver() {
@@ -409,27 +418,19 @@ private let kPlayerSliderImageSize = Float(16)
         }
     }
     
-    // MARK: - Play functions.
-    public func playerPlay(items: [GMPlayerItemProtocol]) {
-        let firstItem = items[0]
-        let playerItem = AVPlayerItem(url: firstItem.playerItemURL())
-        
-        self.player.replaceCurrentItem(with: playerItem)
-        self.player.play()
-        
-        if let audioItem = firstItem as? GMPlayerItemAudio {
+    // MARK: - Video & audio item functions.
+    private func configureView(forItem item: GMPlayerItemProtocol) {
+        if let audioItem = item as? GMPlayerItemAudio {
             self.configureViewForAudio(audioItem: audioItem)
-        } else {
-            self.configureViewForVideo(videoItem: firstItem as! GMPlayerItemVideo)
+        } else if let videoItem = item as? GMPlayerItemVideo {
+            self.configureViewForVideo(videoItem: videoItem)
         }
     }
     
-    // MARK: - Video item functions.
     private func configureViewForVideo(videoItem: GMPlayerItemVideo) {
         self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
-    // MARK: - Audio item functions.
     private func configureViewForAudio(audioItem: GMPlayerItemAudio) {
         if let image = audioItem.playerItemImage() {
             self.setImage(imageNameOrURL: image)
@@ -442,7 +443,33 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerImageView?.setImage(fromPathOrURL: imageNameOrURL, success: { [unowned self] image in
             self.playerImageView?.isHidden = false
             }, fail: { [unowned self] error in
-            self.playerImageView?.isHidden = false
+            self.playerImageView?.isHidden = true
         })
+    }
+    
+    // MARK: - Items functions.
+    private func currentItemChanged() {
+        self.timeSliderSetDuration()
+    }
+    
+    private func loadItems(items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
+        var avItems = [AVPlayerItem]()
+        
+        for item in items {
+            avItems.append(AVPlayerItem(url: item.playerItemURL()))
+        }
+        
+        return avItems
+    }
+    
+    // MARK: - Play functions.
+    public func playerPlay(items: [GMPlayerItemProtocol]) {
+        self.playerItems = items
+        self.playerNextButton?.isEnabled = items.count > 1
+        
+        self.createPlayer(items: self.loadItems(items: items))
+        self.player.play()
+        
+        self.configureView(forItem: items[0])
     }
 }
