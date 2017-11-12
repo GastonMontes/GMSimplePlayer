@@ -286,9 +286,6 @@ private let kPlayerSliderImageSize = Float(16)
             case "status":
                 self.playerHandlerStatusChanged()
             case "currentItem":
-                self.playerCurrentItemIndex += 1
-                print("Se aumento playerCurrentItemIndex en 1 y quedo: \(self.playerCurrentItemIndex)")
-                
                 self.currentItemChanged()
             default:
                 print("Unused KVO key path")
@@ -351,6 +348,7 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     @IBAction private func controlNextAction() {
+        self.player.pause()
         self.player.advanceToNextItem()
     }
     
@@ -469,31 +467,20 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerLayer.frame = self.playerView.bounds
     }
     
-    private func updatePlayer(items: [AVPlayerItem]) {
-        self.player.removeAllItems()
-        
-        var currentItem: AVPlayerItem?
-        
-        for item in items {
-            if self.player.canInsert(item, after: currentItem) {
-                self.player.insert(item, after: currentItem)
-                currentItem = item
-            }
-        }
-    }
-    
     // MARK: - Items functions.
     private func currentItemChanged() {
+        self.playerCurrentItemIndex += 1
+        
         guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItems.count else {
-            print("self.playerCurrentItemIndex is out of range")
             return
         }
         
         self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1
         self.timeSliderSetDuration()
         
-        print("Se llama al configure view con index: \(self.playerCurrentItemIndex)")
         self.configureView(forItem: self.playerItems[self.playerCurrentItemIndex])
+        
+        self.player.play()
     }
     
     private func loadItems(items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
@@ -506,18 +493,11 @@ private let kPlayerSliderImageSize = Float(16)
         return avItems
     }
     
-    private func itemsFromIndex(_ index: Int) -> [GMPlayerItemProtocol] {
+    private func previousItemsToAdd(currentIndex: Int) -> [GMPlayerItemProtocol] {
         var newItems = [GMPlayerItemProtocol]()
         
-        var itemIndex = 0
-        
-        for item in self.playerItems {
-            if itemIndex >= self.playerCurrentItemIndex {
-                newItems.append(item)
-            }
-            
-            itemIndex += 1
-        }
+        newItems.append(self.playerItems[self.playerCurrentItemIndex])
+        newItems.append(self.playerItems[self.playerCurrentItemIndex + 1])
         
         return newItems
     }
@@ -527,17 +507,22 @@ private let kPlayerSliderImageSize = Float(16)
             return
         }
         
-        // NOTE: -2 because KVO currentItem observer functions add 1 to playerCurrentItemIndex and is called twice.
-        // See: observeValue(forKeyPath:, of:, change:, context:)
+        self.player.pause()
         self.playerCurrentItemIndex -= 1
-        print("Se decremento playerCurrentItemIndex en 1 y quedo: \(self.playerCurrentItemIndex)")
         
-        let newItems = self.itemsFromIndex(self.playerCurrentItemIndex)
+        let newItems = self.loadItems(items: self.previousItemsToAdd(currentIndex: self.playerCurrentItemIndex))
         
-        self.playerCurrentItemIndex -= 2
-        print("Se decremento playerCurrentItemIndex en 2 y quedo: \(self.playerCurrentItemIndex)")
+        // NOTE: Decrements again because KVO observer function (currentItemChanged:) increments everytimes.
+        self.playerCurrentItemIndex -= 1
         
-        self.updatePlayer(items: self.loadItems(items: newItems))
+        var currentItem = self.player.currentItem!
+        
+        for item in newItems {
+            self.player.insert(item, after: currentItem)
+            currentItem = item
+        }
+        
+        self.player.advanceToNextItem()
     }
     
     // MARK: - Play functions.
