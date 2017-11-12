@@ -196,7 +196,6 @@ private let kPlayerSliderImageSize = Float(16)
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.insertPlayerInView()
         self.timeSliderSetDefaultImage()
     }
     
@@ -266,14 +265,6 @@ private let kPlayerSliderImageSize = Float(16)
     
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" { self.playerHandlerStatusChanged() }
-    }
-    
-    private func insertPlayerInView() {
-        self.player = AVPlayer()
-        self.playerAddKVOs()
-        
-        self.playerLayer = AVPlayerLayer(player: self.player)
-        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
     }
     
     private func playerAddTimeObserver() {
@@ -390,27 +381,31 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     // MARK: - Play functions.
-    public func playerPlayVideo(fromResource: GMPlayerItemResourceVideo) {
-        // TODO: Gaston - Implementar esto.
+    public func playerPlay(item: GMPlayerItemProtocol) {
+        if let videoItem = item as? GMPlayerItemVideo {
+            self.playVideo(item: videoItem)
+        } else {
+            let audioItem = item as! GMPlayerItemAudio
+            self.playAudio(item: audioItem)
+        }
     }
     
-    public func playerPlayVideo(fromURL: GMPlayerItemURLVideo) {
-        // TODO: Gaston - Implementar esto.
+    // MARK: - Video functions.
+    private func playVideo(item: GMPlayerItemVideo) {
+        self.player = AVPlayer()
+        self.playerAddKVOs()
+        
+        self.playerLayer = AVPlayerLayer(player: self.player)
+        self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
+        
+        let playerItem = AVPlayerItem(url: item.playerItemURL())
+        self.player.replaceCurrentItem(with: playerItem)
+        self.player.play()
+        self.playerAddTimeObserver()
     }
     
-    public func playerPlayAudio(fromResource: GMPlayerItemResourceAudio) {
-        // TODO: Gaston - Implementar esto.
+    // MARK: - Audio functions.
+    func playAudio(item: GMPlayerItemAudio) {
+        
     }
-    
-    public func playerPlayAudio(fromURL: GMPlayerItemURLAudio) {
-        // TODO: Gaston - Implementar esto.
-    }
-    
-//    public func playerPlay(withURLString urlString: String) {
-//        let videoURL = URL(string: urlString)
-//        let playerItem = AVPlayerItem(url: videoURL!)
-//        self.player.replaceCurrentItem(with: playerItem)
-//        self.player.play()
-//        self.playerAddTimeObserver()
-//    }
 }

@@ -21,17 +21,19 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     
     // MARK: - UITableViewDataSource implementation.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.configurationDatasource!.datasourceOptions.count
+        return self.configurationDatasource!.optionCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let option = self.configurationDatasource?.option(forRow: indexPath.row)
         let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.configurationDatasource!.datasourceOptions[indexPath.row].optionName
+        cell.textLabel?.text = option!.playerItemName()!
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let playerController = GMPlayerViewController()
+        let selectedOption = self.configurationDatasource?.option(forRow: indexPath.row)
+        let playerController = GMPlayerViewController(option: selectedOption!)
         self.navigationController?.pushViewController(playerController, animated: true)
     }
 }

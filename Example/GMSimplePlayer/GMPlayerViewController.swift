@@ -11,10 +11,21 @@ import UIKit
 
 class GMPlayerViewController: UIViewController {
     // MARK: - Vars.
-    var playerItemURL: String?
+    var playerItem: GMOption
     
     // MARK: - IBOutlets.
     @IBOutlet private var playerView: GMPlayer?
+    
+    // MARK: - Initialize.
+    init(option: GMOption) {
+        self.playerItem = option
+        
+        super.init(nibName: String(describing: type(of: self)), bundle: Bundle.main)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View life cycle.
     override func viewDidLoad() {
@@ -25,6 +36,7 @@ class GMPlayerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.playerView?.playerPlay(withURLString: self.playerItemURL!)
+
+        self.playerView?.playerPlay(item: self.playerItem)
     }
 }

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GMPlayerViewController" customModule="GMSimplePlayer_Example" customModuleProvider="target">
             <connections>
+                <outlet property="playerView" destination="AkV-M1-4RN" id="91b-vo-PmA"/>
                 <outlet property="view" destination="iN0-l3-epB" id="0CF-r6-1P4"/>
             </connections>
         </placeholder>

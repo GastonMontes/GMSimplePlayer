@@ -15,6 +15,8 @@
 		AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */; };
 		AB0C2DA21FB7CD46000E8131 /* GMPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */; };
 		AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DA51FB7D03A000E8131 /* GMOption.swift */; };
+		AB0C2DAC1FB7F89A000E8131 /* GMOptionVideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */; };
+		AB0C2DAE1FB7F941000E8131 /* GMOptionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */; };
 		ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */; };
 		ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */; };
 		ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */; };
@@ -51,6 +53,8 @@
 		AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GMVideoSelectionViewController.xib; sourceTree = "<group>"; };
 		AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GMPlayerViewController.xib; sourceTree = "<group>"; };
 		AB0C2DA51FB7D03A000E8131 /* GMOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOption.swift; sourceTree = "<group>"; };
+		AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionVideoURL.swift; sourceTree = "<group>"; };
+		AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionFactory.swift; sourceTree = "<group>"; };
 		ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPlayerViewController.swift; sourceTree = "<group>"; };
 		ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVideoSelectionViewController.swift; sourceTree = "<group>"; };
 		ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionDatasource.swift; sourceTree = "<group>"; };
@@ -114,8 +118,9 @@
 		607FACD21AFB9204008FA782 /* Example for GMSimplePlayer */ = {
 			isa = PBXGroup;
 			children = (
-				ABB0463F1FAD39E100D4E220 /* Player */,
-				ABB0463E1FAD39C200D4E220 /* VideoSelection */,
+				AB0C2DA91FB7D36A000E8131 /* Resources */,
+				AB0C2DA81FB7D352000E8131 /* ViewControllers */,
+				AB0C2DA71FB7D33F000E8131 /* Model */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -169,25 +174,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ABB0463E1FAD39C200D4E220 /* VideoSelection */ = {
+		AB0C2DA71FB7D33F000E8131 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */,
-				AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */,
 				ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */,
-				ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */,
 				AB0C2DA51FB7D03A000E8131 /* GMOption.swift */,
+				AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */,
+				AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */,
 			);
-			name = VideoSelection;
+			name = Model;
 			sourceTree = "<group>";
 		};
-		ABB0463F1FAD39E100D4E220 /* Player */ = {
+		AB0C2DA81FB7D352000E8131 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				ABB046381FAD381100D4E220 /* GMPlayerViewController.swift */,
 				AB0C2DA11FB7CD46000E8131 /* GMPlayerViewController.xib */,
+				ABB0463C1FAD392500D4E220 /* GMVideoSelectionViewController.swift */,
+				AB0C2D991FB7C146000E8131 /* GMVideoSelectionViewController.xib */,
 			);
-			name = Player;
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AB0C2DA91FB7D36A000E8131 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,10 +419,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB0C2DAC1FB7F89A000E8131 /* GMOptionVideoURL.swift in Sources */,
 				AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */,
 				ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				ABB046431FAD3A3000D4E220 /* GMOptionDatasource.swift in Sources */,
+				AB0C2DAE1FB7F941000E8131 /* GMOptionFactory.swift in Sources */,
 				ABB0463D1FAD392500D4E220 /* GMVideoSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

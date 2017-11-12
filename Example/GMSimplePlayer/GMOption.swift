@@ -6,12 +6,11 @@
 //  Copyright © 2017 CocoaPods. All rights reserved.
 //
 
+import GMSimplePlayer
 import Foundation
 
 private let kOptionNameKey = "OptionName"
 private let kOptionAuthorKey = "OptionAuthor"
-private let kOptionURLKey = "OptionURL"
-private let kOptionTypeKey = "OptionType"
 
 private let kOptionVideoURL = "URLVideo"
 private let kOptionVideoResource = "ResourceVideo"
@@ -36,16 +35,25 @@ enum GMOptionType {
     }
 }
 
-class GMOption {
-    private(set) var optionName: String
-    private(set) var optionAuthor: String
-    private(set) var optionURL: String
-    private(set) var optionType: GMOptionType
+class GMOption: GMPlayerItemProtocol {
+    private var optionName: String
+    private var optionAuthor: String
     
     init(dictionary: Dictionary<String, String>) {
         optionName = dictionary[kOptionNameKey]!
         optionAuthor = dictionary[kOptionAuthorKey]!
-        optionURL = dictionary[kOptionURLKey]!
-        optionType = GMOptionType(option: dictionary[kOptionTypeKey]!)
+    }
+    
+    // MARK: - GMPlayerItemProtocol implementation.
+    func playerItemName() -> String? {
+        return self.optionName
+    }
+    
+    func playerItemAuthor() -> String? {
+        return self.optionAuthor
+    }
+    
+    func playerItemURL() -> URL {
+        fatalError("Function playerItemURL not implemented in subclass")
     }
 }

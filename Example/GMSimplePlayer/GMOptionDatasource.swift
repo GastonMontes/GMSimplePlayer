@@ -13,7 +13,7 @@ private let kConfigurationFileExtensionKey = "plist"
 
 class GMOptionDatasource {
     // MARK: - Vars.
-    private(set) var datasourceOptions = Array<GMOption>()
+    private var datasourceOptions = Array<GMOption>()
     
     // MARK: - Initialization.
     init() {
@@ -25,8 +25,17 @@ class GMOptionDatasource {
         if let configurationpList = Bundle.main.path(forResource: kConfigurationFileNameKey, ofType: kConfigurationFileExtensionKey) {
             let configurationList = NSArray(contentsOfFile: configurationpList) as! Array<Dictionary<String, String>>
             for dictionary in configurationList {
-                self.datasourceOptions.append(GMOption(dictionary: dictionary))
+                self.datasourceOptions.append(GMOptionFactory.option(dictionary: dictionary))
             }
         }
+    }
+    
+    // MARK: Data functions.
+    func option(forRow row: Int) -> GMOption {
+        return self.datasourceOptions[row]
+    }
+    
+    func optionCount() -> Int {
+        return self.datasourceOptions.count
     }
 }
