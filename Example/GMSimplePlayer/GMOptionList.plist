@@ -14,13 +14,13 @@
 	</dict>
 	<dict>
 		<key>OptionName</key>
-		<string>Sample URL audio</string>
+		<string>Sample URL audio with image</string>
 		<key>OptionAuthor</key>
 		<string>Unknown</string>
 		<key>OptionURL</key>
 		<string>https://s3.amazonaws.com/kargopolov/kukushka.mp3</string>
 		<key>OptionImage</key>
-		<string>https://satoriconcept.com/clients/private.app/covers/01.jpg</string>
+		<string>https://i.pinimg.com/originals/87/02/27/8702274a83477a5179cafd4320b95911.jpg</string>
 		<key>OptionType</key>
 		<string>URLAudio</string>
 	</dict>

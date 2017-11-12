@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 typealias GMDispatchClosure = () -> Void
 
 class GMDispatcher {

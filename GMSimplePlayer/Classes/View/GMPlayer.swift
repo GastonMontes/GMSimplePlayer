@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import Kingfisher
 import UIKit
 
 private let kPlayerTopBarDefaultHeight = CGFloat(40)
@@ -56,6 +57,8 @@ private let kPlayerSliderImageSize = Float(16)
     @IBOutlet private var playerDurationTimeLabel: UILabel?
     
     @IBOutlet private var playerTimeSlider: UISlider?
+    
+    @IBOutlet private var playerImageView: UIImageView?
     
     // MARK: - Inspectables properties.
     @IBInspectable private var tintPlayer: UIColor = UIColor.black {
@@ -231,6 +234,10 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - Top and bottom views functions.
     private func hideTopAndBottomViews() {
+        guard self.playerDispatcher != nil else {
+            return
+        }
+        
         self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
@@ -243,6 +250,10 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     private func showTopAndBottomViews() {
+        guard self.playerDispatcher != nil else {
+            return
+        }
+        
         self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
@@ -400,8 +411,29 @@ private let kPlayerSliderImageSize = Float(16)
         
         if let audioItem = item as? GMPlayerItemAudio {
             self.playerDispatcher = nil
+            self.configureViewForAudio(audioItem: audioItem)
         } else {
-            self.createDispatcher()
+            self.configureViewForVideo(audioItem: item as! GMPlayerItemVideo)
         }
+    }
+    
+    // MARK: - Video item functions.
+    private func configureViewForVideo(audioItem: GMPlayerItemVideo) {
+        self.createDispatcher()
+    }
+    
+    // MARK: - Audio item functions.
+    private func configureViewForAudio(audioItem: GMPlayerItemAudio) {
+        if let image = audioItem.playerItemImage() {
+            self.setImage(imageNameOrURL: image)
+        }
+    }
+    
+    private func setImage(imageNameOrURL: String) {
+        self.playerImageView?.setImage(fromPathOrURL: imageNameOrURL, success: { [unowned self] image in
+            self.playerImageView?.isHidden = false
+            }, fail: { [unowned self] error in
+            self.playerImageView?.isHidden = false
+        })
     }
 }

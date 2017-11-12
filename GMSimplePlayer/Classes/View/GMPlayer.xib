@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +17,7 @@
                 <outlet property="playerBottomViewHeightConstraint" destination="0eV-Cn-sJN" id="Ju1-Oa-1U4"/>
                 <outlet property="playerCurrentTimeLabel" destination="GMW-li-SU9" id="uIh-Ig-haO"/>
                 <outlet property="playerDurationTimeLabel" destination="Cq8-5Z-iYm" id="eQ2-32-xqP"/>
+                <outlet property="playerImageView" destination="DzR-XD-Qlk" id="qAY-4t-PG9"/>
                 <outlet property="playerNextButton" destination="c51-NJ-eoy" id="1Os-ud-Kqt"/>
                 <outlet property="playerPlayPauseButton" destination="zdj-t5-WjQ" id="Lyx-Fq-uUA"/>
                 <outlet property="playerPreviousButton" destination="HY1-RT-qvh" id="NcC-wx-gHI"/>
@@ -165,6 +168,12 @@
                         <constraint firstAttribute="height" constant="40" id="MPM-MX-ANS"/>
                     </constraints>
                 </view>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DzR-XD-Qlk">
+                    <rect key="frame" x="93" y="56" width="189" height="189"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="DzR-XD-Qlk" secondAttribute="height" multiplier="1:1" id="Ryr-6Y-jaa"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -175,9 +184,12 @@
                 <constraint firstItem="DtD-iK-Loa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JLc-Yw-k7Z"/>
                 <constraint firstItem="nV1-8D-UK5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K2y-57-uEP"/>
                 <constraint firstAttribute="bottom" secondItem="3Bl-dB-v5d" secondAttribute="bottom" id="RCq-hs-T4L"/>
+                <constraint firstItem="DzR-XD-Qlk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Zk1-Z6-FTe"/>
                 <constraint firstItem="3Bl-dB-v5d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Zwh-cT-uT7"/>
+                <constraint firstItem="DzR-XD-Qlk" firstAttribute="top" secondItem="DtD-iK-Loa" secondAttribute="bottom" constant="16" id="fjz-2t-YSl"/>
                 <constraint firstAttribute="trailing" secondItem="DtD-iK-Loa" secondAttribute="trailing" id="ltP-YO-kIZ"/>
                 <constraint firstItem="3Bl-dB-v5d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="smh-2Z-FlV"/>
+                <constraint firstItem="nV1-8D-UK5" firstAttribute="top" secondItem="DzR-XD-Qlk" secondAttribute="bottom" constant="16" id="uxe-Zg-5cT"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
