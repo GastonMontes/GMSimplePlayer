@@ -276,14 +276,6 @@ private let kPlayerSliderImageSize = Float(16)
         self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
     }
     
-    public func playerPlay(withURLString urlString: String) {
-        let videoURL = URL(string: urlString)
-        let playerItem = AVPlayerItem(url: videoURL!)
-        self.player.replaceCurrentItem(with: playerItem)
-        self.player.play()
-        self.playerAddTimeObserver()
-    }
-    
     private func playerAddTimeObserver() {
         self.playerRemoveTimeObserver()
         self.playerTimeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1.0, 100),
@@ -396,4 +388,29 @@ private let kPlayerSliderImageSize = Float(16)
         self.player.play()
         self.playerDispatcher.dispatcherDispatch(after: self.timerBarHidden)
     }
+    
+    // MARK: - Play functions.
+    public func playerPlayVideo(fromResource: GMPlayerItemResourceVideo) {
+        // TODO: Gaston - Implementar esto.
+    }
+    
+    public func playerPlayVideo(fromURL: GMPlayerItemURLVideo) {
+        // TODO: Gaston - Implementar esto.
+    }
+    
+    public func playerPlayAudio(fromResource: GMPlayerItemResourceAudio) {
+        // TODO: Gaston - Implementar esto.
+    }
+    
+    public func playerPlayAudio(fromURL: GMPlayerItemURLAudio) {
+        // TODO: Gaston - Implementar esto.
+    }
+    
+//    public func playerPlay(withURLString urlString: String) {
+//        let videoURL = URL(string: urlString)
+//        let playerItem = AVPlayerItem(url: videoURL!)
+//        self.player.replaceCurrentItem(with: playerItem)
+//        self.player.play()
+//        self.playerAddTimeObserver()
+//    }
 }
