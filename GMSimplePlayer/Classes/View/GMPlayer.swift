@@ -32,7 +32,7 @@ private let kPlayerSliderImageSize = Float(16)
     private var playerViewTopBottomViewAreHidden = false
     private var playerDispatcher: GMDispatcher?
     
-    private var player: AVPlayer!
+    private var player: AVQueuePlayer!
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
     
@@ -162,6 +162,7 @@ private let kPlayerSliderImageSize = Float(16)
     private func initializeViews() {
         self.loadView()
         self.createPlayer()
+        self.createDispatcher()
     }
     
     override init(frame: CGRect) {
@@ -209,7 +210,6 @@ private let kPlayerSliderImageSize = Float(16)
                 self.hideTopAndBottomViews()
             }
         })
-        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     // MARK: - View functions.
@@ -222,7 +222,7 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     private func createPlayer() {
-        self.player = AVPlayer()
+        self.player = AVQueuePlayer()
         
         self.playerAddKVOs()
         
@@ -234,7 +234,7 @@ private let kPlayerSliderImageSize = Float(16)
     
     // MARK: - Top and bottom views functions.
     private func hideTopAndBottomViews() {
-        guard self.playerDispatcher != nil else {
+        guard self.timerBarHidden > 0 else {
             return
         }
         
@@ -250,7 +250,7 @@ private let kPlayerSliderImageSize = Float(16)
     }
     
     private func showTopAndBottomViews() {
-        guard self.playerDispatcher != nil else {
+        guard self.timerBarHidden > 0 else {
             return
         }
         
@@ -317,7 +317,9 @@ private let kPlayerSliderImageSize = Float(16)
             self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
         }
         
-        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+        if self.timerBarHidden > 0 {
+            self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+        }
     }
     
     private func controlSeek(addingSeconds: Int) {
@@ -327,7 +329,9 @@ private let kPlayerSliderImageSize = Float(16)
         let playerForwardTime = playerCurrentTime + Float64(addingSeconds)
         
         self.player.seek(to: CMTimeMakeWithSeconds(playerForwardTime, 100), completionHandler: { [unowned self] completed in
-            self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+            if self.timerBarHidden > 0 {
+                self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+            }
         })
     }
     
@@ -399,27 +403,30 @@ private let kPlayerSliderImageSize = Float(16)
         
         self.controlSeek(addingSeconds: timeSelected - currentTime)
         self.player.play()
-        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+        
+        if self.timerBarHidden > 0 {
+            self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+        }
     }
     
     // MARK: - Play functions.
-    public func playerPlay(item: GMPlayerItemProtocol) {
-        let playerItem = AVPlayerItem(url: item.playerItemURL())
+    public func playerPlay(items: [GMPlayerItemProtocol]) {
+        let firstItem = items[0]
+        let playerItem = AVPlayerItem(url: firstItem.playerItemURL())
         
         self.player.replaceCurrentItem(with: playerItem)
         self.player.play()
         
-        if let audioItem = item as? GMPlayerItemAudio {
-            self.playerDispatcher = nil
+        if let audioItem = firstItem as? GMPlayerItemAudio {
             self.configureViewForAudio(audioItem: audioItem)
         } else {
-            self.configureViewForVideo(audioItem: item as! GMPlayerItemVideo)
+            self.configureViewForVideo(videoItem: firstItem as! GMPlayerItemVideo)
         }
     }
     
     // MARK: - Video item functions.
-    private func configureViewForVideo(audioItem: GMPlayerItemVideo) {
-        self.createDispatcher()
+    private func configureViewForVideo(videoItem: GMPlayerItemVideo) {
+        self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
     }
     
     // MARK: - Audio item functions.
@@ -427,6 +434,8 @@ private let kPlayerSliderImageSize = Float(16)
         if let image = audioItem.playerItemImage() {
             self.setImage(imageNameOrURL: image)
         }
+        
+        self.timerBarHidden = 0
     }
     
     private func setImage(imageNameOrURL: String) {

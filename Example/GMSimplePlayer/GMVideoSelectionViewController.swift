@@ -33,7 +33,18 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOption = self.configurationDatasource?.option(forRow: indexPath.row)
-        let playerController = GMPlayerViewController(option: selectedOption!)
+        
+        var playerController: GMPlayerViewController
+        
+        if selectedOption?.playerItemName() == "Play all" {
+            var options = self.configurationDatasource?.options()
+            options?.removeLast()
+            
+            playerController = GMPlayerViewController(options: options!)
+        } else {
+            playerController = GMPlayerViewController(options: [selectedOption!])
+        }
+    
         self.navigationController?.pushViewController(playerController, animated: true)
     }
 }

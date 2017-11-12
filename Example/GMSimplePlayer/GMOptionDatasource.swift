@@ -31,6 +31,10 @@ class GMOptionDatasource {
     }
     
     // MARK: Data functions.
+    func options() -> [GMOption] {
+        return self.datasourceOptions
+    }
+    
     func option(forRow row: Int) -> GMOption {
         return self.datasourceOptions[row]
     }

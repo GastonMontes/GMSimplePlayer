@@ -24,5 +24,25 @@
 		<key>OptionType</key>
 		<string>URLAudio</string>
 	</dict>
+	<dict>
+		<key>OptionName</key>
+		<string>Sample URL audio without image</string>
+		<key>OptionAuthor</key>
+		<string>Unknown</string>
+		<key>OptionURL</key>
+		<string>https://s3.amazonaws.com/kargopolov/BlueCafe.mp3</string>
+		<key>OptionType</key>
+		<string>URLAudio</string>
+	</dict>
+	<dict>
+		<key>OptionName</key>
+		<string>Play all</string>
+		<key>OptionAuthor</key>
+		<string>Unknown</string>
+		<key>OptionURL</key>
+		<string>Unknown</string>
+		<key>OptionType</key>
+		<string>Unknown</string>
+	</dict>
 </array>
 </plist>

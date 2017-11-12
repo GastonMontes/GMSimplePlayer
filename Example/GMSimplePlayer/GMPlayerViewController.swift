@@ -11,14 +11,14 @@ import UIKit
 
 class GMPlayerViewController: UIViewController {
     // MARK: - Vars.
-    var playerItem: GMOption
+    var playerItem: [GMOption]
     
     // MARK: - IBOutlets.
     @IBOutlet private var playerView: GMPlayer?
     
     // MARK: - Initialize.
-    init(option: GMOption) {
-        self.playerItem = option
+    init(options: [GMOption]) {
+        self.playerItem = options
         
         super.init(nibName: String(describing: type(of: self)), bundle: Bundle.main)
     }
@@ -37,6 +37,6 @@ class GMPlayerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.playerView?.playerPlay(item: self.playerItem)
+        self.playerView?.playerPlay(items: self.playerItem)
     }
 }
