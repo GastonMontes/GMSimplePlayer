@@ -172,6 +172,13 @@ private let kPlayerTitleFontDefaultSize = 17
         }
     }
     
+    @IBInspectable public var barsHidden: Bool = false {
+        didSet {
+            self.playerTopView?.isHidden = barsHidden
+            self.playerBottomView?.isHidden = barsHidden
+        }
+    }
+    
     // MARK: - Initialization.
     private func initializeViews() {
         self.loadView()
