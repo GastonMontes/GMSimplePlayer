@@ -42,6 +42,8 @@ private let kPlayerTitleFontDefaultSize = 17
     
     private var playerTimeSliderHasCustomImage: Bool = false
     
+    private var playerCanHideBars = true
+    
     // MARK: - IBOutlets.
     @IBOutlet private var playerTopView: UIView?
     @IBOutlet private var playerTopViewHeightConstraint: NSLayoutConstraint?
@@ -238,7 +240,7 @@ private let kPlayerTitleFontDefaultSize = 17
     
     // MARK: - Top and bottom views functions.
     private func hideTopAndBottomViews() {
-        guard self.timerBarHidden > 0 else {
+        guard self.timerBarHidden > 0 && self.playerCanHideBars else {
             return
         }
         
@@ -254,7 +256,7 @@ private let kPlayerTitleFontDefaultSize = 17
     }
     
     private func showTopAndBottomViews() {
-        guard self.timerBarHidden > 0 else {
+        guard self.timerBarHidden > 0 && self.playerCanHideBars else {
             return
         }
         
@@ -331,7 +333,7 @@ private let kPlayerTitleFontDefaultSize = 17
             self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
         }
         
-        if self.timerBarHidden > 0 {
+        if self.timerBarHidden > 0 && self.playerCanHideBars {
             self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
         }
     }
@@ -343,7 +345,7 @@ private let kPlayerTitleFontDefaultSize = 17
         let playerForwardTime = playerCurrentTime + Float64(addingSeconds)
         
         self.player.seek(to: CMTimeMakeWithSeconds(playerForwardTime, 100), completionHandler: { [unowned self] completed in
-            if self.timerBarHidden > 0 {
+            if self.timerBarHidden > 0 && self.playerCanHideBars {
                 self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
             }
         })
@@ -427,7 +429,7 @@ private let kPlayerTitleFontDefaultSize = 17
         self.controlSeek(addingSeconds: timeSelected - currentTime)
         self.player.play()
         
-        if self.timerBarHidden > 0 {
+        if self.timerBarHidden > 0 && self.playerCanHideBars {
             self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
         }
     }
@@ -447,6 +449,7 @@ private let kPlayerTitleFontDefaultSize = 17
     
     private func configureViewForVideo(videoItem: GMPlayerItemVideo) {
         self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
+        self.playerCanHideBars = true
     }
     
     private func configureViewForAudio(audioItem: GMPlayerItemAudio) {
@@ -454,7 +457,7 @@ private let kPlayerTitleFontDefaultSize = 17
             self.setImage(imageNameOrURL: image)
         }
         
-        self.timerBarHidden = 0
+        self.playerCanHideBars = false
     }
     
     private func setImage(imageNameOrURL: String) {
