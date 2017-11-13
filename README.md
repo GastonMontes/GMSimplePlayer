@@ -8,9 +8,11 @@
 
 ## Description
 
-GMSimplePLayer is a customizable view player. You can customize It styling via code or via Interface Builder. 
+GMSimplePLayer is a customizable view player. 
+You can customize It styling via code or via Interface Builder. 
 To use It you can create an instance with It's initializer or just add a GMPlayer view to your .xib file.
 If you do not want to customize the Player don't worry! The GMPlayer has a basic styling.
+You can play a single track or multiples tracks.
 
 You can customize:
 - Player tint color (Background).
@@ -23,6 +25,7 @@ You can customize:
 - Player seek time (fowward and back).
 - Player images (play, pause, seek forward, seek back, previous, next and slider).
 - Player slider image size (If base dot image selected, dot size can be configured).
+- Player title font size.
 
 
 ## Example
@@ -98,8 +101,8 @@ From now on, be sure to always open the generated Xcode workspace (.xcworkspace)
 
 ## Communication
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/swiftjavascriptbridge). (Tag 'swiftjavascriptbridge')
-- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/swiftjavascriptbridge).
+- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/GMSimplePlayer). (Tag 'GMSimplePlayer')
+- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/GMSimplePlayer).
 - If you **found a bug**, _and can provide steps to reliably reproduce it_, open an issue.
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.

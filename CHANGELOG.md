@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased][unreleased]
 
+## [1.1.1](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.1) - 2017-11-13
+
+### Added
+- Add video/audio title with format: Author - Track title.
+
 ## [1.1.0](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.0) - 2017-11-12
 
 ### Added
