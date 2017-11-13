@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased][unreleased]
 
+## [1.1.2](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.2) - 2017-11-13
+
+### Added
+- Feature to hide top and bottom bars.
+
 ## [1.1.1](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.1) - 2017-11-13
 
 ### Added
