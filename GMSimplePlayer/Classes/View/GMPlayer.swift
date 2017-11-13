@@ -26,6 +26,8 @@ private let kPlayerTimeFormarMinutesSeconds = "%02i:%02i"
 private let kPlayerSliderMaximumTintColorAlpha = CGFloat(0.4)
 private let kPlayerSliderImageSize = Float(16)
 
+private let kPlayerTitleFontDefaultSize = 17
+
 @IBDesignable public class GMPlayer: UIView {
     // MARK: - Vars.
     private var playerView: UIView!
@@ -62,8 +64,10 @@ private let kPlayerSliderImageSize = Float(16)
     
     @IBOutlet private var playerImageView: UIImageView?
     
+    @IBOutlet private var playerTitleLabel: UILabel?
+    
     // MARK: - Inspectables properties.
-    @IBInspectable private var tintPlayer: UIColor = UIColor.black {
+    @IBInspectable public var tintPlayer: UIColor = UIColor.black {
         didSet {
             self.backgroundColor = tintPlayer
             self.playerView.backgroundColor = tintPlayer
@@ -71,7 +75,7 @@ private let kPlayerSliderImageSize = Float(16)
         }
     }
     
-    @IBInspectable private var tintBars: UIColor = UIColor.black {
+    @IBInspectable public var tintBars: UIColor = UIColor.black {
         didSet {
             self.playerTopView?.backgroundColor = tintBars
             self.playerBottomView?.backgroundColor = tintBars
@@ -87,7 +91,7 @@ private let kPlayerSliderImageSize = Float(16)
         }
     }
     
-    @IBInspectable private var tintControls: UIColor = UIColor.white {
+    @IBInspectable public var tintControls: UIColor = UIColor.white {
         didSet {
             self.playerTimeSlider?.minimumTrackTintColor = tintControls
             self.playerTimeSlider?.maximumTrackTintColor = tintControls.withAlphaComponent(kPlayerSliderMaximumTintColorAlpha)
@@ -104,61 +108,67 @@ private let kPlayerSliderImageSize = Float(16)
         }
     }
     
-    @IBInspectable private var heightControls: CGFloat = kPlayerBottomBarDefaultHeight {
+    @IBInspectable public var heightControls: CGFloat = kPlayerBottomBarDefaultHeight {
         didSet {
             self.playerBottomViewHeightConstraint?.constant = heightControls
         }
     }
     
-    @IBInspectable private var heightNavBar: CGFloat = kPlayerTopBarDefaultHeight {
+    @IBInspectable public var heightNavBar: CGFloat = kPlayerTopBarDefaultHeight {
         didSet {
             self.playerTopViewHeightConstraint?.constant = heightNavBar
         }
     }
     
-    @IBInspectable private var timerBarHidden: Double = kPlayerHideBarsAfterSeconds
-    @IBInspectable private var timerAnimation: Double = kPlayerHideBarsAnimationDuration
-    @IBInspectable private var timerSeek: Int = kPlayerSeekingSeconds
+    @IBInspectable public var timerBarHidden: Double = kPlayerHideBarsAfterSeconds
+    @IBInspectable public var timerAnimation: Double = kPlayerHideBarsAnimationDuration
+    @IBInspectable public var timerSeek: Int = kPlayerSeekingSeconds
     
-    @IBInspectable private var imagePlay: UIImage = UIImage.image(name: "PlayerPlay")
+    @IBInspectable public var imagePlay: UIImage = UIImage.image(name: "PlayerPlay")
     
-    @IBInspectable private var imagePause: UIImage = UIImage.image(name: "PlayerPause") {
+    @IBInspectable public var imagePause: UIImage = UIImage.image(name: "PlayerPause") {
         didSet {
             self.playerPlayPauseButton?.setImage(imagePause, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
+    @IBInspectable public var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
         didSet {
             self.playerSeekForwardButton?.setImage(imageForward, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageBack: UIImage = UIImage.image(name: "PlayerSeekBackward") {
+    @IBInspectable public var imageBack: UIImage = UIImage.image(name: "PlayerSeekBackward") {
         didSet {
             self.playerSeekBackwardButton?.setImage(imageBack, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imagePrevious: UIImage = UIImage.image(name: "PlayerPrevious") {
+    @IBInspectable public var imagePrevious: UIImage = UIImage.image(name: "PlayerPrevious") {
         didSet {
             self.playerPreviousButton?.setImage(imagePrevious, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var imageNext: UIImage = UIImage.image(name: "PlayerNext") {
+    @IBInspectable public var imageNext: UIImage = UIImage.image(name: "PlayerNext") {
         didSet {
             self.playerNextButton?.setImage(imageNext, for: UIControlState.normal)
         }
     }
     
-    @IBInspectable private var sliderImage: UIImage = UIImage.imageDot(size: kPlayerSliderImageSize, color: UIColor.white) {
+    @IBInspectable public var sliderImage: UIImage = UIImage.imageDot(size: kPlayerSliderImageSize, color: UIColor.white) {
         didSet {
             self.playerTimeSliderHasCustomImage = true
         }
     }
     
-    @IBInspectable private var sliderSize: Float = kPlayerSliderImageSize
+    @IBInspectable public var sliderSize: Float = kPlayerSliderImageSize
+    
+    @IBInspectable public var titleFontSize: Int = kPlayerTitleFontDefaultSize {
+        didSet {
+            self.playerTitleLabel?.font = UIFont.systemFont(ofSize: CGFloat(titleFontSize))
+        }
+    }
     
     // MARK: - Initialization.
     private func initializeViews() {
@@ -431,6 +441,8 @@ private let kPlayerSliderImageSize = Float(16)
         } else if let videoItem = item as? GMPlayerItemVideo {
             self.configureViewForVideo(videoItem: videoItem)
         }
+        
+        self.setTitle(forItem: item)
     }
     
     private func configureViewForVideo(videoItem: GMPlayerItemVideo) {
@@ -523,6 +535,10 @@ private let kPlayerSliderImageSize = Float(16)
         }
         
         self.player.advanceToNextItem()
+    }
+    
+    private func setTitle(forItem item: GMPlayerItemProtocol) {
+        self.playerTitleLabel?.text = "\(item.playerItemAuthor() ?? "") - \(item.playerItemTitle() ?? "")"
     }
     
     // MARK: - Play functions.

@@ -45,7 +45,7 @@ class GMOption: GMPlayerItemProtocol {
     }
     
     // MARK: - GMPlayerItemProtocol implementation.
-    func playerItemName() -> String? {
+    func playerItemTitle() -> String? {
         return self.optionName
     }
     

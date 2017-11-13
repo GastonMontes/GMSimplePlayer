@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol GMPlayerItemProtocol {
-    func playerItemName() -> String?
+    func playerItemTitle() -> String?
     func playerItemAuthor() -> String?
     func playerItemURL() -> URL
 }

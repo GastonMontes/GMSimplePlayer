@@ -27,7 +27,7 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let option = self.configurationDatasource?.option(forRow: indexPath.row)
         let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-        cell.textLabel?.text = option!.playerItemName()!
+        cell.textLabel?.text = option!.playerItemTitle()!
         return cell
     }
     
@@ -36,7 +36,7 @@ class GMVideoSelectionViewController: UIViewController, UITableViewDelegate, UIT
         
         var playerController: GMPlayerViewController
         
-        if selectedOption?.playerItemName() == "Play all" {
+        if selectedOption?.playerItemTitle() == "Play all" {
             var options = self.configurationDatasource?.options()
             options?.removeLast()
             
