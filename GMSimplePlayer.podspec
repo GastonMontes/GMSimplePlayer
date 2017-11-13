@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GMSimplePlayer'
-  s.version          = '1.1.1'
+  s.version          = '1.1.2'
   s.summary          = 'GMSimplePlayer is a simple and customizable player.'
   s.description      = 'GMSimplePlayer is a simple and customizable player. You can customize via code or interface builder Its icons, colors, labels, fonts, etc.' 
   s.homepage         = 'https://github.com/GastonMontes/GMSimplePlayer'
