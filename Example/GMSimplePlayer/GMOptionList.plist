@@ -36,6 +36,18 @@
 	</dict>
 	<dict>
 		<key>OptionName</key>
+		<string>Sample Resource video</string>
+		<key>OptionAuthor</key>
+		<string>Unknown</string>
+		<key>OptionFileName</key>
+		<string>SampleVideo</string>
+		<key>OptionFileExtension</key>
+		<string>mp4</string>
+		<key>OptionType</key>
+		<string>ResourceVideo</string>
+	</dict>
+	<dict>
+		<key>OptionName</key>
 		<string>Play all</string>
 		<key>OptionAuthor</key>
 		<string>Unknown</string>

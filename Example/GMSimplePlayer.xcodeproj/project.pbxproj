@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38C5161F1FBB36BC005CE09D /* SampleVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 38C5161E1FBB36BC005CE09D /* SampleVideo.mp4 */; };
+		38C516211FBB379D005CE09D /* GMOptionVideoResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C516201FBB379D005CE09D /* GMOptionVideoResource.swift */; };
 		41EC894853E0805A90BC9293 /* Pods_GMSimplePlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D7E1DC9DD1935A4F9F95316 /* Pods_GMSimplePlayer_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		0501C782CA05A8F94ECC50AF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		38C5161E1FBB36BC005CE09D /* SampleVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SampleVideo.mp4; sourceTree = "<group>"; };
+		38C516201FBB379D005CE09D /* GMOptionVideoResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMOptionVideoResource.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GMSimplePlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMSimplePlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,8 +186,9 @@
 				ABB046421FAD3A3000D4E220 /* GMOptionDatasource.swift */,
 				AB0C2DAD1FB7F941000E8131 /* GMOptionFactory.swift */,
 				AB0C2DA51FB7D03A000E8131 /* GMOption.swift */,
-				AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */,
 				AB0C2DB01FB807F0000E8131 /* GMOptionAudioURL.swift */,
+				AB0C2DAB1FB7F89A000E8131 /* GMOptionVideoURL.swift */,
+				38C516201FBB379D005CE09D /* GMOptionVideoResource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 		AB0C2DA91FB7D36A000E8131 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38C5161E1FBB36BC005CE09D /* SampleVideo.mp4 */,
 				ABB046441FAD3A8C00D4E220 /* GMOptionList.plist */,
 			);
 			name = Resources;
@@ -301,6 +307,7 @@
 				ABB046451FAD3A8C00D4E220 /* GMOptionList.plist in Resources */,
 				AB0C2DA21FB7CD46000E8131 /* GMPlayerViewController.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				38C5161F1FBB36BC005CE09D /* SampleVideo.mp4 in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				AB0C2D9A1FB7C146000E8131 /* GMVideoSelectionViewController.xib in Resources */,
 			);
@@ -426,6 +433,7 @@
 			files = (
 				AB0C2DAC1FB7F89A000E8131 /* GMOptionVideoURL.swift in Sources */,
 				AB0C2DA61FB7D03A000E8131 /* GMOption.swift in Sources */,
+				38C516211FBB379D005CE09D /* GMOptionVideoResource.swift in Sources */,
 				ABB0463A1FAD381100D4E220 /* GMPlayerViewController.swift in Sources */,
 				AB0C2DB11FB807F0000E8131 /* GMOptionAudioURL.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

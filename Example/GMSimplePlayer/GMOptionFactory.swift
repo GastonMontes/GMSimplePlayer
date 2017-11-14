@@ -11,6 +11,7 @@ import Foundation
 private let kOptionTypeKey = "OptionType"
 private let kOptionTypeVideoURL = "URLVideo"
 private let kOptionTypeAudioURL = "URLAudio"
+private let kOptionTypeResourceVideo = "ResourceVideo"
 
 class GMOptionFactory {
     class func option(dictionary: Dictionary<String, String>) -> GMOption {
@@ -21,6 +22,8 @@ class GMOptionFactory {
             return GMOptionVideoURL(dictionary: dictionary)
         case kOptionTypeAudioURL:
             return GMOptionAudioURL(dictionary: dictionary)
+        case kOptionTypeResourceVideo:
+            return GMOptionVideoResource(dictionary: dictionary)
         default:
             return GMOption(dictionary: dictionary)
         }
