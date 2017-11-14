@@ -185,7 +185,7 @@ private let kPlayerTitleFontDefaultSize = 17
         self.createDispatcher()
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         
         super.init(frame: frame)
         
