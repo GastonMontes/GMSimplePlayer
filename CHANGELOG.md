@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initialization with frame.
 - `GMSimplePlayer` with an example that plays sample resource video.
+- Looping tracks.
 
 ## [1.1.2](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.2) - 2017-11-13
 

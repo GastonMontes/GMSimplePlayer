@@ -179,6 +179,8 @@ private let kPlayerTitleFontDefaultSize = 17
         }
     }
     
+    @IBInspectable public var playerLoops: Bool = false
+    
     // MARK: - Initialization.
     private func initializeViews() {
         self.loadView()
@@ -262,11 +264,7 @@ private let kPlayerTitleFontDefaultSize = 17
         })
     }
     
-    private func showTopAndBottomViews() {
-        guard self.timerBarHidden > 0 && self.playerCanHideBars else {
-            return
-        }
-        
+    private func showTopAndBottomViews() {        
         self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
@@ -465,6 +463,7 @@ private let kPlayerTitleFontDefaultSize = 17
         }
         
         self.playerCanHideBars = false
+        self.showTopAndBottomViews()
     }
     
     private func setImage(imageNameOrURL: String) {
@@ -490,10 +489,29 @@ private let kPlayerTitleFontDefaultSize = 17
     }
     
     // MARK: - Items functions.
+    private func isLastItem() -> Bool {
+        return self.playerCurrentItemIndex == self.playerItems.count
+    }
+    
     private func currentItemChanged() {
         self.playerCurrentItemIndex += 1
         
         guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItems.count else {
+            if self.isLastItem() && self.playerLoops {
+                let items = self.loadItems(items: self.playerItems)
+                var currentItem = self.player.currentItem
+                
+                for item in items {
+                    self.player.insert(item, after: currentItem)
+                    currentItem = item
+                }
+                
+                self.playerCurrentItemIndex = 0
+                self.configureView(forItem: self.playerItems[0])
+                
+                self.player.play()
+            }
+            
             return
         }
         
