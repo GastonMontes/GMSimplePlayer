@@ -35,6 +35,7 @@ private let kPlayerTitleFontDefaultSize = 17
     private var playerDispatcher: GMDispatcher?
     
     private var player: AVQueuePlayer!
+    private var playerLooper: AVPlayerLooper?
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
     private var playerItems = [AVPlayerItem]()
@@ -442,6 +443,11 @@ private let kPlayerTitleFontDefaultSize = 17
     
     // MARK: - Video & audio item functions.
     private func configureView(forItem item: GMPlayerItemProtocol) {
+        let isOnlyItem = self.playerItems.count == 1
+        let isLastItem = self.playerCurrentItemIndex < self.playerItemsProtocols.count - 1
+        self.playerNextButton?.isEnabled = (!isLastItem || self.playerLoops) && !isOnlyItem
+        
+        self.timeSliderSetDuration()
         self.playerImageView?.isHidden = true
         
         if let audioItem = item as? GMPlayerItemAudio {
@@ -479,6 +485,11 @@ private let kPlayerTitleFontDefaultSize = 17
     private func createPlayer() {
         self.player = AVQueuePlayer(items: self.playerItems)
         
+        // AVPlayerLooper only works with 1 item.
+        if self.playerLoops && self.playerItems.count == 1 {
+            self.playerLooper = AVPlayerLooper(player: self.player, templateItem: self.playerItems[0])
+        }
+        
         self.playerAddKVOs()
         
         self.playerLayer = AVPlayerLayer(player: self.player)
@@ -489,39 +500,38 @@ private let kPlayerTitleFontDefaultSize = 17
         self.playerLayer.frame = self.playerView.bounds
     }
     
+    private func configurePlayer(forItem item: GMPlayerItemProtocol) {
+        
+    }
+    
     // MARK: - Items functions.
-    private func isLastItem() -> Bool {
-        return self.player.items().count == 0
+    private func playNextItem(lastItem: AVPlayerItem) {
+        self.configureView(forItem: self.playerItemsProtocols[self.playerCurrentItemIndex])
+        self.player.play()
+        
+        if self.playerLoops {
+            self.player.seek(to: kCMTimeZero)
+            self.player.insert(lastItem, after: self.player.items().last)
+        }
     }
     
     private func currentItemChanged() {
         self.playerCurrentItemIndex += 1
         
         guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItemsProtocols.count else {
-            if self.isLastItem() && self.playerLoops {
-                let items = self.getPlayerItems(fromProtocol: self.playerItemsProtocols)
-                var currentItem = self.player.currentItem
-                
-                for item in items {
-                    self.player.insert(item, after: currentItem)
-                    currentItem = item
-                }
-                
+            // If it's a single video looping is going to enter here everytime.
+            
+            if self.playerItems.count > 1 && self.playerLoops {
+                // Set to 0 because if player is looping with multiples videos is going to entre here again.
+                // So set playerCurrentItemIndex to 0 to restar the looping.
                 self.playerCurrentItemIndex = 0
-                self.configureView(forItem: self.playerItemsProtocols[0])
-                
-                self.player.pause()
-                self.player.play()
+                self.playNextItem(lastItem: self.playerItems.last!)
             }
             
             return
         }
-        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItemsProtocols.count - 1 || self.playerLoops
-        self.timeSliderSetDuration()
         
-        self.configureView(forItem: self.playerItemsProtocols[self.playerCurrentItemIndex])
-
-        self.player.play()
+        self.playNextItem(lastItem: self.playerItems[self.playerCurrentItemIndex - 1])
     }
     
     private func loadPlayerItems(items: [GMPlayerItemProtocol]) {
