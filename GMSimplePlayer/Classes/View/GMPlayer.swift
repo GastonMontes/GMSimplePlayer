@@ -37,7 +37,7 @@ private let kPlayerTitleFontDefaultSize = 17
     private var player: AVQueuePlayer!
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
-    private var playerItems = [GMPlayerItemProtocol]()
+    private var playerItemsProtocols = [GMPlayerItemProtocol]()
     private var playerCurrentItemIndex = Int(0)
     
     private var playerTimeSliderHasCustomImage: Bool = false
@@ -490,15 +490,15 @@ private let kPlayerTitleFontDefaultSize = 17
     
     // MARK: - Items functions.
     private func isLastItem() -> Bool {
-        return self.playerCurrentItemIndex == self.playerItems.count
+        return self.player.items().count == 0
     }
     
     private func currentItemChanged() {
         self.playerCurrentItemIndex += 1
         
-        guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItems.count else {
+        guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItemsProtocols.count else {
             if self.isLastItem() && self.playerLoops {
-                let items = self.loadItems(items: self.playerItems)
+                let items = self.loadItems(items: self.playerItemsProtocols)
                 var currentItem = self.player.currentItem
                 
                 for item in items {
@@ -507,7 +507,7 @@ private let kPlayerTitleFontDefaultSize = 17
                 }
                 
                 self.playerCurrentItemIndex = 0
-                self.configureView(forItem: self.playerItems[0])
+                self.configureView(forItem: self.playerItemsProtocols[0])
                 
                 self.player.pause()
                 self.player.play()
@@ -515,10 +515,10 @@ private let kPlayerTitleFontDefaultSize = 17
             
             return
         }
-        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1 || self.playerLoops
+        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItemsProtocols.count - 1 || self.playerLoops
         self.timeSliderSetDuration()
         
-        self.configureView(forItem: self.playerItems[self.playerCurrentItemIndex])
+        self.configureView(forItem: self.playerItemsProtocols[self.playerCurrentItemIndex])
 
         self.player.play()
     }
@@ -536,8 +536,8 @@ private let kPlayerTitleFontDefaultSize = 17
     private func previousItemsToAdd(currentIndex: Int) -> [GMPlayerItemProtocol] {
         var newItems = [GMPlayerItemProtocol]()
         
-        newItems.append(self.playerItems[self.playerCurrentItemIndex])
-        newItems.append(self.playerItems[self.playerCurrentItemIndex + 1])
+        newItems.append(self.playerItemsProtocols[self.playerCurrentItemIndex])
+        newItems.append(self.playerItemsProtocols[self.playerCurrentItemIndex + 1])
         
         return newItems
     }
@@ -571,7 +571,7 @@ private let kPlayerTitleFontDefaultSize = 17
     
     // MARK: - Play functions.
     public func playerPlay(items: [GMPlayerItemProtocol]) {
-        self.playerItems = items
+        self.playerItemsProtocols = items
         self.playerNextButton?.isEnabled = items.count > 1
         
         self.createPlayer(items: self.loadItems(items: items))
