@@ -264,7 +264,7 @@ private let kPlayerTitleFontDefaultSize = 17
         })
     }
     
-    private func showTopAndBottomViews() {        
+    private func showTopAndBottomViews() {
         self.playerDispatcher?.dispatcherStop()
         
         UIView.animate(withDuration: self.timerAnimation, animations: { [unowned self] in
@@ -509,17 +509,17 @@ private let kPlayerTitleFontDefaultSize = 17
                 self.playerCurrentItemIndex = 0
                 self.configureView(forItem: self.playerItems[0])
                 
+                self.player.pause()
                 self.player.play()
             }
             
             return
         }
-        
-        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1
+        self.playerNextButton?.isEnabled = self.playerCurrentItemIndex < self.playerItems.count - 1 || self.playerLoops
         self.timeSliderSetDuration()
         
         self.configureView(forItem: self.playerItems[self.playerCurrentItemIndex])
-        
+
         self.player.play()
     }
     
