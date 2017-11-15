@@ -37,6 +37,7 @@ private let kPlayerTitleFontDefaultSize = 17
     private var player: AVQueuePlayer!
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
+    private var playerItems = [AVPlayerItem]()
     private var playerItemsProtocols = [GMPlayerItemProtocol]()
     private var playerCurrentItemIndex = Int(0)
     
@@ -475,8 +476,8 @@ private let kPlayerTitleFontDefaultSize = 17
     }
     
     // MARK: - Player functions.
-    private func createPlayer(items: [AVPlayerItem]) {
-        self.player = AVQueuePlayer(items: items)
+    private func createPlayer() {
+        self.player = AVQueuePlayer(items: self.playerItems)
         
         self.playerAddKVOs()
         
@@ -498,7 +499,7 @@ private let kPlayerTitleFontDefaultSize = 17
         
         guard self.self.playerCurrentItemIndex >= 0 && self.playerCurrentItemIndex < self.playerItemsProtocols.count else {
             if self.isLastItem() && self.playerLoops {
-                let items = self.loadItems(items: self.playerItemsProtocols)
+                let items = self.getPlayerItems(fromProtocol: self.playerItemsProtocols)
                 var currentItem = self.player.currentItem
                 
                 for item in items {
@@ -523,7 +524,13 @@ private let kPlayerTitleFontDefaultSize = 17
         self.player.play()
     }
     
-    private func loadItems(items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
+    private func loadPlayerItems(items: [GMPlayerItemProtocol]) {
+        for item in items {
+            self.playerItems.append(AVPlayerItem(url: item.playerItemURL()))
+        }
+    }
+    
+    private func getPlayerItems(fromProtocol items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
         var avItems = [AVPlayerItem]()
         
         for item in items {
@@ -550,7 +557,7 @@ private let kPlayerTitleFontDefaultSize = 17
         self.player.pause()
         self.playerCurrentItemIndex -= 1
         
-        let newItems = self.loadItems(items: self.previousItemsToAdd(currentIndex: self.playerCurrentItemIndex))
+        let newItems = self.getPlayerItems(fromProtocol: self.previousItemsToAdd(currentIndex: self.playerCurrentItemIndex))
         
         // NOTE: Decrements again because KVO observer function (currentItemChanged:) increments everytimes.
         self.playerCurrentItemIndex -= 1
@@ -574,7 +581,8 @@ private let kPlayerTitleFontDefaultSize = 17
         self.playerItemsProtocols = items
         self.playerNextButton?.isEnabled = items.count > 1
         
-        self.createPlayer(items: self.loadItems(items: items))
+        self.loadPlayerItems(items: items)
+        self.createPlayer()
         self.player.play()
         
         self.configureView(forItem: items[0])
