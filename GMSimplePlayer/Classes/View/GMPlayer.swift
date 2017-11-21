@@ -372,7 +372,7 @@ private let kPlayerTitleFontDefaultSize = 17
     }
     
     @IBAction private func controlPreviousAction() {
-        if Int(CMTimeGetSeconds(self.player.currentTime())) >= 1 {
+        if Int(CMTimeGetSeconds(self.player.currentTime())) >= 1 || self.playerItems.count <= 1 {
             self.controlSeek(addingSeconds: -Int(CMTimeGetSeconds(self.player.currentTime())))
         } else {
             self.previousItemSelected()
@@ -477,7 +477,7 @@ private let kPlayerTitleFontDefaultSize = 17
         self.playerImageView?.setImage(fromPathOrURL: imageNameOrURL, success: { [unowned self] image in
             self.playerImageView?.isHidden = false
             }, fail: { [unowned self] error in
-            self.playerImageView?.isHidden = true
+                self.playerImageView?.isHidden = true
         })
     }
     
@@ -506,11 +506,11 @@ private let kPlayerTitleFontDefaultSize = 17
     
     // MARK: - Items functions.
     private func playNextItem(lastItem: AVPlayerItem) {
+        self.player.seek(to: kCMTimeZero)
         self.configureView(forItem: self.playerItemsProtocols[self.playerCurrentItemIndex])
         self.player.play()
         
-        if self.playerLoops {
-            self.player.seek(to: kCMTimeZero)
+        if self.playerLoops && self.player.canInsert(lastItem, after: self.player.items().last) {
             self.player.insert(lastItem, after: self.player.items().last)
         }
     }
@@ -550,36 +550,35 @@ private let kPlayerTitleFontDefaultSize = 17
         return avItems
     }
     
-    private func previousItemsToAdd(currentIndex: Int) -> [GMPlayerItemProtocol] {
-        var newItems = [GMPlayerItemProtocol]()
-        
-        newItems.append(self.playerItemsProtocols[self.playerCurrentItemIndex])
-        newItems.append(self.playerItemsProtocols[self.playerCurrentItemIndex + 1])
-        
-        return newItems
-    }
-    
     private func previousItemSelected() {
-        guard self.playerCurrentItemIndex > 0 else {
+        let currentItemIndex = self.playerCurrentItemIndex - 1
+        
+        guard currentItemIndex >= 0 else {
+            self.playerCurrentItemIndex = 0
+            
+            if self.playerLoops {
+                self.playerCurrentItemIndex = self.playerItems.count
+                self.previousItemSelected()
+            }
+            
             return
         }
         
         self.player.pause()
-        self.playerCurrentItemIndex -= 1
         
-        let newItems = self.getPlayerItems(fromProtocol: self.previousItemsToAdd(currentIndex: self.playerCurrentItemIndex))
+        let lastItem = self.player.items().first
+        let currentItem = self.playerItems[currentItemIndex]
         
-        // NOTE: Decrements again because KVO observer function (currentItemChanged:) increments everytimes.
-        self.playerCurrentItemIndex -= 1
-        
-        var currentItem = self.player.currentItem!
-        
-        for item in newItems {
-            self.player.insert(item, after: currentItem)
-            currentItem = item
-        }
+        self.player.remove(currentItem)
+        self.player.insert(currentItem, after: lastItem)
         
         self.player.advanceToNextItem()
+        self.configureView(forItem: self.playerItemsProtocols[currentItemIndex])
+        
+        self.player.remove(lastItem!)
+        self.player.insert(lastItem!, after: currentItem)
+        
+        self.playerCurrentItemIndex = currentItemIndex
     }
     
     private func setTitle(forItem item: GMPlayerItemProtocol) {
