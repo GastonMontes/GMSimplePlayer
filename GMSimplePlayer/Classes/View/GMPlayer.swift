@@ -444,7 +444,7 @@ private let kPlayerTitleFontDefaultSize = 17
     // MARK: - Video & audio item functions.
     private func configureView(forItem item: GMPlayerItemProtocol) {
         let isOnlyItem = self.playerItems.count == 1
-        let isLastItem = self.playerCurrentItemIndex < self.playerItemsProtocols.count - 1
+        let isLastItem = self.playerCurrentItemIndex >= self.playerItemsProtocols.count - 1
         self.playerNextButton?.isEnabled = (!isLastItem || self.playerLoops) && !isOnlyItem
         
         self.timeSliderSetDuration()
