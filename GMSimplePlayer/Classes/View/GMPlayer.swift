@@ -75,7 +75,6 @@ private let kPlayerTitleFontDefaultSize = 17
         didSet {
             self.backgroundColor = tintPlayer
             self.playerView.backgroundColor = tintPlayer
-            self.playerLayer.backgroundColor = tintPlayer.cgColor
         }
     }
     
@@ -494,6 +493,7 @@ private let kPlayerTitleFontDefaultSize = 17
         
         self.playerLayer = AVPlayerLayer(player: self.player)
         self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
+        self.playerLayer.backgroundColor = tintPlayer.cgColor
         
         self.playerAddTimeObserver()
         
