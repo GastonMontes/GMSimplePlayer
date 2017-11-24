@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased][unreleased]
 
+## [1.1.4](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.4) - 2017-11-24
+
+### Fixed
+- Crash when setting player tint color.
+
+## [1.1.3](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.3) - 2017-11-21
+
 ### Added
 - Initialization with frame.
 - `GMSimplePlayer` with an example that plays sample resource video.
