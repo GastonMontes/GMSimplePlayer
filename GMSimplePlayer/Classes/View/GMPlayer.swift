@@ -433,6 +433,22 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
             return
         }
         
+        self.playerLoops = !self.playerLoops
+        
+        if self.playerLoops == true {
+            for item in self.playerItems {
+                if self.player.canInsert(item, after: self.player.items().last) {
+                    self.player.insert(item, after: self.player.items().last)
+                }
+            }
+        } else {
+            for item in self.playerItems {
+                if self.playerItems.index(of: item)! < self.playerCurrentItemIndex {
+                    self.player.remove(item)
+                }
+            }
+        }
+        
         self.playerLoopButton!.isSelected = !self.playerLoopButton!.isSelected
     }
     
@@ -619,7 +635,10 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
                 
                 self.playerCurrentItemIndex = 0
                 self.playNextItem(lastItem: self.playerItems[self.playerCurrentItemIndex])
-                self.player.pause()
+                
+                if self.playerLoops == false {
+                    self.player.pause()
+                }
             }
             
             return
