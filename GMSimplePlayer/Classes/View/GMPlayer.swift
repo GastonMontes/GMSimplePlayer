@@ -52,8 +52,6 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     
     private var playerCanHideBars = true
     
-    private var playerLoops = false
-    
     // MARK: - IBOutlets.
     @IBOutlet private var playerTopView: UIView?
     @IBOutlet private var playerTopViewHeightConstraint: NSLayoutConstraint?
@@ -246,6 +244,12 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
                     constraint.constant = 0
                 }
             }
+        }
+    }
+    
+    @IBInspectable public var playerLoops: Bool = false {
+        didSet {
+            self.playerLoopButton?.isSelected = playerLoops
         }
     }
     
@@ -481,7 +485,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
             self.loopDeletePlayedItems()
         }
         
-        self.playerLoopButton!.isSelected = !self.playerLoopButton!.isSelected
+        self.playerLoopButton!.isSelected = self.playerLoops
         self.configurePlayerNextButton()
     }
     
