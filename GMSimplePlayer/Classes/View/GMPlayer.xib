@@ -32,6 +32,14 @@
                 <outlet property="playerTopView" destination="DtD-iK-Loa" id="WuK-Ja-aBV"/>
                 <outlet property="playerTopViewHeightConstraint" destination="MPM-MX-ANS" id="Jwx-BV-xPr"/>
                 <outlet property="playerTopViewTopMarginConstraint" destination="8fO-bu-tNp" id="s4N-FC-Z1E"/>
+                <outletCollection property="playerSeekConstraints" destination="zkT-Tb-DEw" collectionClass="NSMutableArray" id="IZt-yo-NAl"/>
+                <outletCollection property="playerSeekConstraints" destination="A5G-cX-tOi" collectionClass="NSMutableArray" id="nX6-ZS-nZH"/>
+                <outletCollection property="playerSeekConstraints" destination="iNz-Nb-8lY" collectionClass="NSMutableArray" id="HPn-LS-3kM"/>
+                <outletCollection property="playerSeekConstraints" destination="E5f-J4-W35" collectionClass="NSMutableArray" id="zz1-1A-QJ8"/>
+                <outletCollection property="playerShuffleLoopConstraints" destination="Y3q-RU-qLV" collectionClass="NSMutableArray" id="9j2-qe-Mje"/>
+                <outletCollection property="playerShuffleLoopConstraints" destination="oZ2-rO-V65" collectionClass="NSMutableArray" id="Hvf-sB-7iK"/>
+                <outletCollection property="playerShuffleLoopConstraints" destination="23E-bA-BRl" collectionClass="NSMutableArray" id="OaL-oO-BZl"/>
+                <outletCollection property="playerShuffleLoopConstraints" destination="nT6-Fc-3nF" collectionClass="NSMutableArray" id="Z9T-fc-wgr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

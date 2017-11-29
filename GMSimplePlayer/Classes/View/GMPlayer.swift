@@ -83,6 +83,9 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBOutlet private var playerItemNameLabel: UILabel?
     @IBOutlet private var playerItemAuthorLabel: UILabel?
     
+    @IBOutlet private var playerSeekConstraints: [NSLayoutConstraint]?
+    @IBOutlet private var playerShuffleLoopConstraints: [NSLayoutConstraint]?
+    
     // MARK: - Inspectables properties.
     @IBInspectable public var tintPlayer: UIColor = UIColor.black {
         didSet {
@@ -226,7 +229,25 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBInspectable public var imageBorderSize: Float = kPlayerImageBorderDefaultSize
     @IBInspectable public var imageBorderColor: UIColor = kPlayerImageBorderDefaultColor
     
-    @IBInspectable public var layerGravity: AVLayerVideoGravity = AVLayerVideoGravity.resizeAspect
+    @IBInspectable public var hideSeekButtons: Bool = false {
+        didSet {
+            if hideSeekButtons == true {
+                for constraint in self.playerSeekConstraints! {
+                    constraint.constant = 0
+                }
+            }
+        }
+    }
+    
+    @IBInspectable public var hideShuffleLoopButtons: Bool = false {
+        didSet {
+            if hideShuffleLoopButtons == true {
+                for constraint in self.playerShuffleLoopConstraints! {
+                    constraint.constant = 0
+                }
+            }
+        }
+    }
     
     // MARK: - Initialization.
     private func initializeViews() {
@@ -381,14 +402,12 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         
         self.playerDispatcher?.dispatcherStop()
         
-        self.playerPlayPauseButton?.isSelected = !self.playerPlayPauseButton!.isSelected
-        
         if self.player.rate > 0 {
             self.player.pause()
-//            self.playerPlayPauseButton?.setImage(self.imagePlay, for: UIControlState.normal)
+            self.playerPlayPauseButton?.isSelected = true
         } else {
             self.player.play()
-//            self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
+            self.playerPlayPauseButton?.isSelected = false
         }
         
         if self.timerBarHidden > 0 && self.playerCanHideBars {
@@ -706,8 +725,6 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
                     return
                 }
                 
-                self.controlPlayPauseAction()
-                
                 var currentItem: AVPlayerItem?
                 
                 for playerItem in self.playerItems {
@@ -719,7 +736,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
                 self.playNextItem(lastItem: self.playerItems[self.playerCurrentItemIndex])
                 
                 if self.playerLoops == false {
-                    self.player.pause()
+                    self.controlPlayPauseAction()
                 }
             }
             
