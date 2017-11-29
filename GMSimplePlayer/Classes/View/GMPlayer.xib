@@ -47,19 +47,20 @@
                     <rect key="frame" x="0.0" y="625" width="375" height="72"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdj-t5-WjQ">
-                            <rect key="frame" x="172" y="8" width="32" height="32"/>
+                            <rect key="frame" x="159.5" y="-8" width="56" height="56"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="8kC-5c-Rgu"/>
-                                <constraint firstAttribute="height" constant="32" id="Qps-SZ-b06"/>
+                                <constraint firstAttribute="width" constant="56" id="8kC-5c-Rgu"/>
+                                <constraint firstAttribute="height" constant="56" id="Qps-SZ-b06"/>
                             </constraints>
-                            <state key="normal" image="PlayerPause"/>
+                            <state key="normal" backgroundImage="PlayerPause"/>
+                            <state key="selected" backgroundImage="PlayerPlay"/>
                             <connections>
                                 <action selector="controlPlayPauseAction" destination="-1" eventType="touchUpInside" id="Ick-kr-Deh"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m1-8a-MIb">
-                            <rect key="frame" x="220" y="8" width="32" height="32"/>
+                            <rect key="frame" x="231.5" y="8" width="32" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="R45-AF-WJg"/>
@@ -71,7 +72,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enF-te-0Nv">
-                            <rect key="frame" x="124" y="8" width="32" height="32"/>
+                            <rect key="frame" x="111.5" y="8" width="32" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="7gJ-qX-3jH"/>
@@ -83,7 +84,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HY1-RT-qvh">
-                            <rect key="frame" x="76" y="8" width="32" height="32"/>
+                            <rect key="frame" x="63.5" y="8" width="32" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="96p-oX-5Y7"/>
@@ -95,7 +96,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-Oz-L0J">
-                            <rect key="frame" x="36" y="12" width="24" height="24"/>
+                            <rect key="frame" x="23.5" y="12" width="24" height="24"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="Xfo-9Z-RDa"/>
@@ -108,7 +109,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c51-NJ-eoy">
-                            <rect key="frame" x="268" y="8" width="32" height="32"/>
+                            <rect key="frame" x="279.5" y="8" width="32" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="A3K-gU-Dz9"/>
@@ -120,7 +121,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b91-2Z-ozE">
-                            <rect key="frame" x="316" y="12" width="24" height="24"/>
+                            <rect key="frame" x="327.5" y="12" width="24" height="24"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="23E-bA-BRl"/>
@@ -172,7 +173,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Cq8-5Z-iYm" secondAttribute="trailing" constant="8" id="0Q7-bU-OJB"/>
                         <constraint firstAttribute="height" constant="72" id="0eV-Cn-sJN"/>
-                        <constraint firstAttribute="bottom" secondItem="zdj-t5-WjQ" secondAttribute="bottom" constant="32" id="2K4-bA-EhX"/>
+                        <constraint firstAttribute="bottom" secondItem="zdj-t5-WjQ" secondAttribute="bottom" constant="24" id="2K4-bA-EhX"/>
                         <constraint firstAttribute="bottom" secondItem="c51-NJ-eoy" secondAttribute="bottom" constant="32" id="4TB-uh-XEm"/>
                         <constraint firstItem="c51-NJ-eoy" firstAttribute="leading" secondItem="1m1-8a-MIb" secondAttribute="trailing" constant="16" id="6cZ-UA-xZD"/>
                         <constraint firstItem="zdj-t5-WjQ" firstAttribute="leading" secondItem="enF-te-0Nv" secondAttribute="trailing" constant="16" id="A5G-cX-tOi"/>
@@ -249,7 +250,8 @@
         <image name="PlayerLoop" width="25" height="25"/>
         <image name="PlayerLoopSelected" width="25" height="25"/>
         <image name="PlayerNext" width="36" height="36"/>
-        <image name="PlayerPause" width="36" height="36"/>
+        <image name="PlayerPause" width="37" height="37"/>
+        <image name="PlayerPlay" width="37" height="37"/>
         <image name="PlayerPrevious" width="36" height="36"/>
         <image name="PlayerSeekBackward" width="36" height="36"/>
         <image name="PlayerSeekForward" width="36" height="36"/>

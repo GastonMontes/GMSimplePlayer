@@ -90,7 +90,6 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
             self.playerTopView?.backgroundColor = tintBars
             self.playerBottomView?.backgroundColor = tintBars
             self.playerPlayPauseButton?.backgroundColor = tintBars
-            self.playerPlayPauseButton?.backgroundColor = tintBars
             self.playerSeekForwardButton?.backgroundColor = tintBars
             self.playerSeekBackwardButton?.backgroundColor = tintBars
             self.playerPreviousButton?.backgroundColor = tintBars
@@ -138,13 +137,13 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     
     @IBInspectable public var imagePause: UIImage = UIImage.image(name: "PlayerPause") {
         didSet {
-            self.playerPlayPauseButton?.setImage(imagePause, for: UIControlState.normal)
+            self.playerPlayPauseButton?.setBackgroundImage(imagePause, for: UIControlState.normal)
         }
     }
     
     @IBInspectable public var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
         didSet {
-            self.playerSeekForwardButton?.setImage(imageForward, for: UIControlState.normal)
+            self.playerPlayPauseButton?.setBackgroundImage(imageForward, for: UIControlState.selected)
         }
     }
     
@@ -361,14 +360,20 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     
     // MARK: - Controls actions.
     @IBAction private func controlPlayPauseAction() {
+        guard self.playerPlayPauseButton != nil else {
+            return
+        }
+        
         self.playerDispatcher?.dispatcherStop()
+        
+        self.playerPlayPauseButton?.isSelected = !self.playerPlayPauseButton!.isSelected
         
         if self.player.rate > 0 {
             self.player.pause()
-            self.playerPlayPauseButton?.setImage(self.imagePlay, for: UIControlState.normal)
+//            self.playerPlayPauseButton?.setImage(self.imagePlay, for: UIControlState.normal)
         } else {
             self.player.play()
-            self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
+//            self.playerPlayPauseButton?.setImage(self.imagePause, for: UIControlState.normal)
         }
         
         if self.timerBarHidden > 0 && self.playerCanHideBars {
