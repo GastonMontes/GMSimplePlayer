@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/ElgatitoMontes'
   s.ios.deployment_target = '11.0'
   s.source_files = 'GMSimplePlayer/Classes/**/*'
-# s.resource_bundles = { => ['GMSimplePlayer/Assets/Assets.xcassets'] }
   s.resources = "GMSimplePlayer/Assets/Assets.xcassets"
   s.dependency 'Kingfisher', '~> 4.1.1'
 end
