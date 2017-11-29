@@ -23,10 +23,15 @@ You can customize:
 - Player bar hidden time.
 - Player bar hidden animation time.
 - Player seek time (fowward and back).
-- Player images (play, pause, seek forward, seek back, previous, next and slider).
+- Player images (play, pause, seek forward, seek back, previous, next, shuffle, loop and slider).
 - Player slider image size (If base dot image selected, dot size can be configured).
 - Player title font size.
-
+- Player video gravity value.
+- Player audio track name label.
+- Player audio author label.
+- Player title.
+- Hide shuffle and loop buttons.
+- Hide seeks buttons.
 
 ## Example
 
@@ -41,7 +46,7 @@ To run the example project, follow these steps:
 
 | GMSimplePlayer Version |     Minimum iOS Target      |      Minimum OS X Target     |              Notes               |
 |:----------------------:|:---------------------------:|:----------------------------:|:--------------------------------:|
-|         1.0.0          |           iOS 9.0           |           OS X 10.10.4       |        Xcode 8 required.         |
+|         1.0.0          |           iOS 11.0           |           OS X 10.12.6       |        Xcode 9 required.         |
 
 ## Installation
 
