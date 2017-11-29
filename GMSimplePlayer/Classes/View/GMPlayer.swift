@@ -226,6 +226,8 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBInspectable public var imageBorderSize: Float = kPlayerImageBorderDefaultSize
     @IBInspectable public var imageBorderColor: UIColor = kPlayerImageBorderDefaultColor
     
+    @IBInspectable public var layerGravity: AVLayerVideoGravity = AVLayerVideoGravity.resizeAspect
+    
     // MARK: - Initialization.
     private func initializeViews() {
         self.loadView()
@@ -652,7 +654,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     // MARK: - Player functions.
-    private func createPlayer() {
+    private func createPlayer(layerGravity: AVLayerVideoGravity) {
         self.player = AVQueuePlayer(items: self.playerItems)
         
         // AVPlayerLooper only works with 1 item.
@@ -663,6 +665,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         self.playerAddKVOs()
         
         self.playerLayer = AVPlayerLayer(player: self.player)
+        self.playerLayer.videoGravity = layerGravity
         self.playerView!.layer.insertSublayer(self.playerLayer, at: 0)
         self.playerLayer.backgroundColor = tintPlayer.cgColor
         
@@ -792,14 +795,14 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     // MARK: - Play functions.
-    public func playerPlay(items: [GMPlayerItemProtocol]) {
+    public func playerPlay(items: [GMPlayerItemProtocol], layerGravity: AVLayerVideoGravity = .resizeAspect) {
         self.playerItemsProtocols = items
         self.playerItemsProtocolsShuffleBackup = self.playerItemsProtocols
         
         self.playerNextButton?.isEnabled = items.count > 1
         
         self.loadPlayerItems(items: items)
-        self.createPlayer()
+        self.createPlayer(layerGravity: layerGravity)
         self.player.play()
         
         self.configureView(forItem: items[0])
