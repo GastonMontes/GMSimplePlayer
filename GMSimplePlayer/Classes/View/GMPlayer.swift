@@ -27,7 +27,9 @@ private let kPlayerSliderMaximumTintColorAlpha = CGFloat(0.4)
 private let kPlayerSliderImageSize = Float(16)
 
 private let kPlayerTitleFontDefaultSize = 17
+
 private let kPlayerImageBorderDefaultSize = Float(16)
+private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 255, blue: 25 / 255, alpha: 1.0)
 
 @IBDesignable public class GMPlayer: UIView {
     // MARK: - Vars.
@@ -61,6 +63,8 @@ private let kPlayerImageBorderDefaultSize = Float(16)
     @IBOutlet private var playerSeekBackwardButton: UIButton?
     @IBOutlet private var playerPreviousButton: UIButton?
     @IBOutlet private var playerNextButton: UIButton?
+    @IBOutlet private var playerShuffleButton: UIButton?
+    @IBOutlet private var playerLoopButton: UIButton?
     
     @IBOutlet private var playerCurrentTimeLabel: UILabel?
     @IBOutlet private var playerDurationTimeLabel: UILabel?
@@ -184,7 +188,7 @@ private let kPlayerImageBorderDefaultSize = Float(16)
     @IBInspectable public var playerLoops: Bool = false
     
     @IBInspectable public var imageBorderSize: Float = kPlayerImageBorderDefaultSize
-    @IBInspectable public var imageBorderColor: UIColor = UIColor(red: 20 / 255, green: 21 / 255, blue: 22 / 255, alpha: 1.0)
+    @IBInspectable public var imageBorderColor: UIColor = kPlayerImageBorderDefaultColor
     
     // MARK: - Initialization.
     private func initializeViews() {
