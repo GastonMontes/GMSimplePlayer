@@ -166,6 +166,30 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
         }
     }
     
+    @IBInspectable public var imageShuffle: UIImage = UIImage.image(name: "shuffle") {
+        didSet {
+            self.playerShuffleButton?.setImage(imageShuffle, for: UIControlState.normal)
+        }
+    }
+    
+    @IBInspectable public var imageShuffleSelected: UIImage = UIImage.image(name: "shuffleSelected") {
+        didSet {
+            self.playerShuffleButton?.setImage(imageShuffleSelected, for: UIControlState.selected)
+        }
+    }
+    
+    @IBInspectable public var imageLoop: UIImage = UIImage.image(name: "PlayerLoop") {
+        didSet {
+            self.playerLoopButton?.setImage(imageLoop, for: UIControlState.normal)
+        }
+    }
+    
+    @IBInspectable public var imageLoopSelected: UIImage = UIImage.image(name: "PlayerLoopSelected") {
+        didSet {
+            self.playerLoopButton?.setImage(imageLoopSelected, for: UIControlState.selected)
+        }
+    }
+    
     @IBInspectable public var sliderImage: UIImage = UIImage.imageDot(size: kPlayerSliderImageSize, color: UIColor.white) {
         didSet {
             self.playerTimeSliderHasCustomImage = true
@@ -471,6 +495,7 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
         let isOnlyItem = self.playerItems.count == 1
         let isLastItem = self.playerCurrentItemIndex >= self.playerItemsProtocols.count - 1
         self.playerNextButton?.isEnabled = (!isLastItem || self.playerLoops) && !isOnlyItem
+        self.playerShuffleButton?.isEnabled = !isOnlyItem
         
         self.timeSliderSetDuration()
         self.playerImageView?.isHidden = true
