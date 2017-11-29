@@ -102,6 +102,10 @@
                                 <constraint firstAttribute="width" constant="24" id="Y3q-RU-qLV"/>
                             </constraints>
                             <state key="normal" image="shuffle"/>
+                            <state key="selected" image="shuffleSelected"/>
+                            <connections>
+                                <action selector="controlShuffleAction" destination="-1" eventType="touchUpInside" id="Gbl-JA-Vos"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c51-NJ-eoy">
                             <rect key="frame" x="268" y="8" width="32" height="32"/>
@@ -122,7 +126,11 @@
                                 <constraint firstAttribute="width" constant="24" id="23E-bA-BRl"/>
                                 <constraint firstAttribute="height" constant="24" id="pfu-3f-Imz"/>
                             </constraints>
-                            <state key="normal" image="loop"/>
+                            <state key="normal" image="PlayerLoop"/>
+                            <state key="selected" image="PlayerLoopSelected"/>
+                            <connections>
+                                <action selector="controlLoopAction" destination="-1" eventType="touchUpInside" id="qgp-6H-Ia0"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-li-SU9">
                             <rect key="frame" x="8" y="49.5" width="36" height="14.5"/>
@@ -238,12 +246,14 @@
         </view>
     </objects>
     <resources>
+        <image name="PlayerLoop" width="25" height="25"/>
+        <image name="PlayerLoopSelected" width="25" height="25"/>
         <image name="PlayerNext" width="36" height="36"/>
         <image name="PlayerPause" width="36" height="36"/>
         <image name="PlayerPrevious" width="36" height="36"/>
         <image name="PlayerSeekBackward" width="36" height="36"/>
         <image name="PlayerSeekForward" width="36" height="36"/>
-        <image name="loop" width="25" height="25"/>
-        <image name="shuffle" width="37" height="37"/>
+        <image name="shuffle" width="25" height="25"/>
+        <image name="shuffleSelected" width="25" height="25"/>
     </resources>
 </document>

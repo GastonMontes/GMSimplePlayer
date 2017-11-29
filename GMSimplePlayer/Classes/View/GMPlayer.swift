@@ -49,6 +49,8 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     
     private var playerCanHideBars = true
     
+    private var playerLoops = false
+    
     // MARK: - IBOutlets.
     @IBOutlet private var playerTopView: UIView?
     @IBOutlet private var playerTopViewHeightConstraint: NSLayoutConstraint?
@@ -184,8 +186,6 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
             self.playerBottomView?.isHidden = barsHidden
         }
     }
-    
-    @IBInspectable public var playerLoops: Bool = false
     
     @IBInspectable public var imageBorderSize: Float = kPlayerImageBorderDefaultSize
     @IBInspectable public var imageBorderColor: UIColor = kPlayerImageBorderDefaultColor
@@ -384,6 +384,22 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
         } else {
             self.previousItemSelected()
         }
+    }
+    
+    @IBAction private func controlLoopAction() {
+        guard self.playerLoopButton != nil else {
+            return
+        }
+        
+        self.playerLoopButton!.isSelected = !self.playerLoopButton!.isSelected
+    }
+    
+    @IBAction private func controlShuffleAction() {
+        guard self.playerShuffleButton != nil else {
+            return
+        }
+        
+        self.playerShuffleButton!.isSelected = !self.playerShuffleButton!.isSelected
     }
     
     // MARK: - Time slider functions.

@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "loop@2x.png",
+      "filename" : "PlayerLoop@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "loop@3x.png",
+      "filename" : "PlayerLoop@3x.png",
       "scale" : "3x"
     }
   ],
