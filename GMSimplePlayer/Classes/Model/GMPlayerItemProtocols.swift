@@ -17,4 +17,5 @@ public protocol GMPlayerItemVideo: GMPlayerItemProtocol {}
 
 public protocol GMPlayerItemAudio: GMPlayerItemProtocol {
     func playerItemImage() -> String?
+    func playerTitle() -> String?
 }

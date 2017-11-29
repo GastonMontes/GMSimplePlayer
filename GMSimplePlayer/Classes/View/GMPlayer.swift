@@ -26,10 +26,11 @@ private let kPlayerTimeFormarMinutesSeconds = "%02i:%02i"
 private let kPlayerSliderMaximumTintColorAlpha = CGFloat(0.4)
 private let kPlayerSliderImageSize = Float(16)
 
-private let kPlayerTitleFontDefaultSize = 17
-
 private let kPlayerImageBorderDefaultSize = Float(16)
 private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 255, blue: 25 / 255, alpha: 1.0)
+
+private let kPlayerBottomAudioHeightConstraint = CGFloat(136)
+private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
 
 @IBDesignable public class GMPlayer: UIView {
     // MARK: - Vars.
@@ -77,6 +78,9 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     
     @IBOutlet private var playerTitleLabel: UILabel?
     
+    @IBOutlet private var playerItemNameLabel: UILabel?
+    @IBOutlet private var playerItemAuthorLabel: UILabel?
+    
     // MARK: - Inspectables properties.
     @IBInspectable public var tintPlayer: UIColor = UIColor.black {
         didSet {
@@ -97,6 +101,11 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
             self.playerCurrentTimeLabel?.backgroundColor = tintBars
             self.playerDurationTimeLabel?.backgroundColor = tintBars
             self.playerTimeSlider?.backgroundColor = tintBars
+            self.playerShuffleButton?.backgroundColor = tintBars
+            self.playerLoopButton?.backgroundColor = tintBars
+            self.playerTitleLabel?.backgroundColor = tintBars
+            self.playerItemNameLabel?.backgroundColor = tintBars
+            self.playerItemAuthorLabel?.backgroundColor = tintBars
         }
     }
     
@@ -108,12 +117,20 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
             self.playerCurrentTimeLabel?.textColor = tintControls
             self.playerDurationTimeLabel?.textColor = tintControls
             
+            self.playerTitleLabel?.textColor = tintControls
+            self.playerItemNameLabel?.textColor = tintControls
+            self.playerItemAuthorLabel?.textColor = tintControls
+            
             self.imagePrevious = self.imagePrevious.imageMaskWithColor(color: tintControls)!
             self.imageBack = self.imageBack.imageMaskWithColor(color: tintControls)!
             self.imagePlay = self.imagePlay.imageMaskWithColor(color: tintControls)!
             self.imagePause = self.imagePause.imageMaskWithColor(color: tintControls)!
             self.imageForward = self.imageForward.imageMaskWithColor(color: tintControls)!
             self.imageNext = self.imageNext.imageMaskWithColor(color: tintControls)!
+            self.imageLoop = self.imageLoop.imageMaskWithColor(color: tintControls)!
+            self.imageLoopSelected = self.imageLoopSelected.imageMaskWithColor(color: tintControls)!
+            self.imageShuffle = self.imageShuffle.imageMaskWithColor(color: tintControls)!
+            self.imageShuffleSelected = self.imageShuffleSelected.imageMaskWithColor(color: tintControls)!
         }
     }
     
@@ -196,12 +213,6 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     }
     
     @IBInspectable public var sliderSize: Float = kPlayerSliderImageSize
-    
-    @IBInspectable public var titleFontSize: Int = kPlayerTitleFontDefaultSize {
-        didSet {
-            self.playerTitleLabel?.font = UIFont.systemFont(ofSize: CGFloat(titleFontSize))
-        }
-    }
     
     @IBInspectable public var barsHidden: Bool = false {
         didSet {
@@ -510,19 +521,20 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
         } else if let videoItem = item as? GMPlayerItemVideo {
             self.configureViewForVideo(videoItem: videoItem)
         }
-        
-        self.setTitle(forItem: item)
     }
     
     private func configureViewForVideo(videoItem: GMPlayerItemVideo) {
         self.playerDispatcher?.dispatcherDispatch(after: self.timerBarHidden)
         self.playerCanHideBars = true
+        self.setTitle(forItem: videoItem)
     }
     
     private func configureViewForAudio(audioItem: GMPlayerItemAudio) {
         if let image = audioItem.playerItemImage() {
             self.setImage(imageNameOrURL: image)
         }
+        
+        self.setTextProperties(forItem: audioItem)
         
         self.playerCanHideBars = false
         self.showTopAndBottomViews()
@@ -663,8 +675,20 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
         self.playerCurrentItemIndex = currentItemIndex
     }
     
-    private func setTitle(forItem item: GMPlayerItemProtocol) {
+    private func setTextProperties(forItem item: GMPlayerItemAudio) {
+        self.playerTitleLabel?.text = item.playerTitle()
+        
+        self.playerBottomViewHeightConstraint?.constant = kPlayerBottomAudioHeightConstraint
+        self.playerItemNameLabel?.text = item.playerItemTitle()
+        self.playerItemAuthorLabel?.text = item.playerItemAuthor()
+    }
+    
+    private func setTitle(forItem item: GMPlayerItemVideo) {
         self.playerTitleLabel?.text = "\(item.playerItemAuthor() ?? "") - \(item.playerItemTitle() ?? "")"
+        
+        self.playerBottomViewHeightConstraint?.constant = kPlayerBottomVideoHeightConstraint
+        self.playerItemNameLabel?.text = ""
+        self.playerItemAuthorLabel?.text = ""
     }
     
     // MARK: - Play functions.

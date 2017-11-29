@@ -30,6 +30,10 @@ class GMOptionAudioURL: GMOption, GMPlayerItemAudio {
         return self.optionAudioImage
     }
     
+    func playerTitle() -> String? {
+        return "Audio Example"
+    }
+    
     override func playerItemURL() -> URL {
         return URL(string: self.optionAudioURL)!
     }
