@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased][unreleased]
 
+## [1.2.0](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.2.0) - 2017-11-29
+
+### Changed
+- New audio Look & Feel.
+
+### Added
+- Player loop button.
+- Player shuffle button.
+
 ## [1.1.4](https://github.com/GastonMontes/GMSimplePlayer/releases/tag/1.1.4) - 2017-11-24
 
 ### Fixed
