@@ -379,10 +379,12 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
     }
     
     @IBAction private func controlPreviousAction() {
-        if Int(CMTimeGetSeconds(self.player.currentTime())) >= 1 || self.playerItems.count <= 1 {
-            self.controlSeek(addingSeconds: -Int(CMTimeGetSeconds(self.player.currentTime())))
-        } else {
-            self.previousItemSelected()
+        if self.player.rate > 0 {
+            if Int(CMTimeGetSeconds(self.player.currentTime())) >= 1 || self.playerItems.count <= 1 {
+                self.controlSeek(addingSeconds: -Int(CMTimeGetSeconds(self.player.currentTime())))
+            } else {
+                self.previousItemSelected()
+            }
         }
     }
     
@@ -558,6 +560,24 @@ private let kPlayerImageBorderDefaultColor = UIColor(red: 25 / 255, green: 25 / 
                 // So set playerCurrentItemIndex to 0 to restar the looping.
                 self.playerCurrentItemIndex = 0
                 self.playNextItem(lastItem: self.playerItems.last!)
+            } else {
+                // Last item finished.
+                guard self.player.items().count < 1 else {
+                    return
+                }
+                
+                self.controlPlayPauseAction()
+                
+                var currentItem: AVPlayerItem?
+                
+                for playerItem in self.playerItems {
+                    self.player.insert(playerItem, after: currentItem)
+                    currentItem = playerItem
+                }
+                
+                self.playerCurrentItemIndex = 0
+                self.playNextItem(lastItem: self.playerItems[self.playerCurrentItemIndex])
+                self.player.pause()
             }
             
             return
