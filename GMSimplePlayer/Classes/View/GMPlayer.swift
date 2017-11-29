@@ -27,6 +27,7 @@ private let kPlayerSliderMaximumTintColorAlpha = CGFloat(0.4)
 private let kPlayerSliderImageSize = Float(16)
 
 private let kPlayerTitleFontDefaultSize = 17
+private let kPlayerImageBorderDefaultSize = Float(16)
 
 @IBDesignable public class GMPlayer: UIView {
     // MARK: - Vars.
@@ -181,6 +182,9 @@ private let kPlayerTitleFontDefaultSize = 17
     }
     
     @IBInspectable public var playerLoops: Bool = false
+    
+    @IBInspectable public var imageBorderSize: Float = kPlayerImageBorderDefaultSize
+    @IBInspectable public var imageBorderColor: UIColor = UIColor(red: 20 / 255, green: 21 / 255, blue: 22 / 255, alpha: 1.0)
     
     // MARK: - Initialization.
     private func initializeViews() {
@@ -474,7 +478,15 @@ private let kPlayerTitleFontDefaultSize = 17
     
     private func setImage(imageNameOrURL: String) {
         self.playerImageView?.setImage(fromPathOrURL: imageNameOrURL, success: { [unowned self] image in
-            self.playerImageView?.isHidden = false
+            guard self.playerImageView != nil else {
+                return
+            }
+            
+            self.playerImageView!.isHidden = false
+            
+            let playerSize = (self.playerImageView!.frameWidth() > self.playerImageView!.frameHeight()) ? self.playerImageView!.frameHeight() : self.playerImageView!.frameWidth()
+            
+            self.playerImageView?.border(withRadius: Float(playerSize / 2), borderWidth: self.imageBorderSize, borderColor: self.imageBorderColor)
             }, fail: { [unowned self] error in
                 self.playerImageView?.isHidden = true
         })
