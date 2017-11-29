@@ -43,7 +43,9 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     private var playerLayer: AVPlayerLayer!
     private var playerTimeObserver: Any?
     private var playerItems = [AVPlayerItem]()
+    private var playerItemsShuffleBackup = [AVPlayerItem]()
     private var playerItemsProtocols = [GMPlayerItemProtocol]()
+    private var playerItemsProtocolsShuffleBackup = [GMPlayerItemProtocol]()
     private var playerCurrentItemIndex = Int(0)
     
     private var playerTimeSliderHasCustomImage: Bool = false
@@ -428,6 +430,23 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         }
     }
     
+    // MARK: - Loop action functions.
+    private func loopAddMissingItems() {
+        for item in self.playerItems {
+            if self.player.canInsert(item, after: self.player.items().last) {
+                self.player.insert(item, after: self.player.items().last)
+            }
+        }
+    }
+    
+    private func loopDeletePlayedItems() {
+        for item in self.playerItems {
+            if self.playerItems.index(of: item)! < self.playerCurrentItemIndex {
+                self.player.remove(item)
+            }
+        }
+    }
+    
     @IBAction private func controlLoopAction() {
         guard self.playerLoopButton != nil else {
             return
@@ -436,20 +455,64 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         self.playerLoops = !self.playerLoops
         
         if self.playerLoops == true {
-            for item in self.playerItems {
-                if self.player.canInsert(item, after: self.player.items().last) {
-                    self.player.insert(item, after: self.player.items().last)
-                }
-            }
+            self.loopAddMissingItems()
         } else {
-            for item in self.playerItems {
-                if self.playerItems.index(of: item)! < self.playerCurrentItemIndex {
-                    self.player.remove(item)
-                }
-            }
+            self.loopDeletePlayedItems()
         }
         
         self.playerLoopButton!.isSelected = !self.playerLoopButton!.isSelected
+        self.configurePlayerNextButton()
+    }
+    
+    // MARK: - Shuffle functions.
+    private func shuffleDeleteItemsExceptCurrent() {
+        for item in self.player.items() {
+            if item != self.player.currentItem {
+                self.player.remove(item)
+            }
+        }
+        
+        self.playerItems.removeAll()
+        self.playerItemsProtocols.removeAll()
+        
+        self.playerItems.append(self.player.currentItem!)
+        self.playerItemsProtocols.append(self.playerItemsProtocolsShuffleBackup[self.playerCurrentItemIndex])
+    }
+    
+    private func shuffleAddRandomItems() {
+        while self.player.items().count < self.playerItemsShuffleBackup.count {
+            let randomInt = Int.random(range: 0..<self.playerItemsShuffleBackup.count)
+            let randomItem = self.playerItemsShuffleBackup[randomInt]
+            let randomProtocol = self.playerItemsProtocolsShuffleBackup[randomInt]
+            
+            if self.player.canInsert(randomItem, after: self.player.items().last) {
+                self.player.insert(randomItem, after: self.player.items().last)
+                self.playerItems.append(randomItem)
+                self.playerItemsProtocols.append(randomProtocol)
+            }
+        }
+        
+        self.playerCurrentItemIndex = 0
+    }
+    
+    private func shuffleAddNotPlayedItems() {
+        self.playerItems = self.playerItemsShuffleBackup
+        self.playerItemsProtocols = self.playerItemsProtocolsShuffleBackup
+        self.playerCurrentItemIndex = self.playerItems.index(of: self.player.currentItem!)!
+        
+        for item in self.playerItems {
+            if self.playerItems.index(of: item)! > self.playerCurrentItemIndex {
+                self.player.insert(item, after: self.player.items().last)
+            }
+        }
+    }
+    
+    private func shuffleAddPlayedItems() {
+        for item in self.playerItems {
+            if self.playerItems.index(of: item)! < self.playerCurrentItemIndex {
+                self.player.insert(item, after: self.player.items().last)
+            }
+        }
     }
     
     @IBAction private func controlShuffleAction() {
@@ -458,6 +521,18 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         }
         
         self.playerShuffleButton!.isSelected = !self.playerShuffleButton!.isSelected
+        
+        self.shuffleDeleteItemsExceptCurrent()
+        
+        if self.playerShuffleButton!.isSelected == true {
+            self.shuffleAddRandomItems()
+        } else {
+            self.shuffleAddNotPlayedItems()
+            
+            if self.playerLoops {
+                self.shuffleAddPlayedItems()
+            }
+        }
     }
     
     // MARK: - Time slider functions.
@@ -523,11 +598,15 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     // MARK: - Video & audio item functions.
-    private func configureView(forItem item: GMPlayerItemProtocol) {
+    private func configurePlayerNextButton() {
         let isOnlyItem = self.playerItems.count == 1
         let isLastItem = self.playerCurrentItemIndex >= self.playerItemsProtocols.count - 1
         self.playerNextButton?.isEnabled = (!isLastItem || self.playerLoops) && !isOnlyItem
         self.playerShuffleButton?.isEnabled = !isOnlyItem
+    }
+    
+    private func configureView(forItem item: GMPlayerItemProtocol) {
+        self.configurePlayerNextButton()
         
         self.timeSliderSetDuration()
         self.playerImageView?.isHidden = true
@@ -651,6 +730,8 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         for item in items {
             self.playerItems.append(AVPlayerItem(url: item.playerItemURL()))
         }
+        
+        self.playerItemsShuffleBackup = self.playerItems
     }
     
     private func getPlayerItems(fromProtocol items: [GMPlayerItemProtocol]) -> [AVPlayerItem] {
@@ -713,6 +794,8 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     // MARK: - Play functions.
     public func playerPlay(items: [GMPlayerItemProtocol]) {
         self.playerItemsProtocols = items
+        self.playerItemsProtocolsShuffleBackup = self.playerItemsProtocols
+        
         self.playerNextButton?.isEnabled = items.count > 1
         
         self.loadPlayerItems(items: items)
