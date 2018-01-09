@@ -833,5 +833,6 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
         self.controlPreviousAction()
         self.playerPlayPauseButton?.isSelected = true
         self.player.pause()
+        self.player.removeAllItems()
     }
 }
