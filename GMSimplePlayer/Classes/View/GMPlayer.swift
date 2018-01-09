@@ -830,7 +830,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     public func playerStop() {
-        self.player.pause()
         self.player.removeAllItems()
+        self.player.pause()
     }
 }
