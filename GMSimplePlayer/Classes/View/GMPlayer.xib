@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +17,7 @@
                 <outlet property="playerBottomViewHeightConstraint" destination="0eV-Cn-sJN" id="Ju1-Oa-1U4"/>
                 <outlet property="playerCurrentTimeLabel" destination="GMW-li-SU9" id="uIh-Ig-haO"/>
                 <outlet property="playerDurationTimeLabel" destination="Cq8-5Z-iYm" id="eQ2-32-xqP"/>
+                <outlet property="playerImageSize" destination="2dK-Cr-q5S" id="Es8-x5-VXU"/>
                 <outlet property="playerImageView" destination="DzR-XD-Qlk" id="qAY-4t-PG9"/>
                 <outlet property="playerItemAuthorLabel" destination="ZEZ-fp-CYM" id="Efj-jm-QHW"/>
                 <outlet property="playerItemNameLabel" destination="ap2-s5-keL" id="bWt-Cm-HVZ"/>
@@ -255,6 +256,7 @@
                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DzR-XD-Qlk">
                     <rect key="frame" x="24" y="137" width="327" height="327"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="327" id="2dK-Cr-q5S"/>
                         <constraint firstAttribute="width" secondItem="DzR-XD-Qlk" secondAttribute="height" multiplier="1:1" id="Ryr-6Y-jaa"/>
                     </constraints>
                 </imageView>
@@ -264,9 +266,7 @@
                 <constraint firstAttribute="bottom" secondItem="nV1-8D-UK5" secondAttribute="bottom" id="2iM-lb-x4D"/>
                 <constraint firstItem="DtD-iK-Loa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8fO-bu-tNp"/>
                 <constraint firstAttribute="trailing" secondItem="nV1-8D-UK5" secondAttribute="trailing" id="9Uj-Gl-69c"/>
-                <constraint firstAttribute="trailing" secondItem="DzR-XD-Qlk" secondAttribute="trailing" constant="24" id="DlK-DC-HU6"/>
                 <constraint firstAttribute="trailing" secondItem="3Bl-dB-v5d" secondAttribute="trailing" id="E3p-pZ-ZB0"/>
-                <constraint firstItem="DzR-XD-Qlk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="HFP-Lh-On4"/>
                 <constraint firstItem="DtD-iK-Loa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JLc-Yw-k7Z"/>
                 <constraint firstItem="nV1-8D-UK5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K2y-57-uEP"/>
                 <constraint firstAttribute="bottom" secondItem="3Bl-dB-v5d" secondAttribute="bottom" id="RCq-hs-T4L"/>

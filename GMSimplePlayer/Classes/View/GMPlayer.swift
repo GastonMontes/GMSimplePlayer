@@ -75,6 +75,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBOutlet private var playerTimeSlider: UISlider?
     
     @IBOutlet private var playerImageView: UIImageView?
+    @IBOutlet private var playerImageSize: NSLayoutConstraint?
     
     @IBOutlet private var playerTitleLabel: UILabel?
     
@@ -668,9 +669,15 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
             
             self.playerImageView!.isHidden = false
             
-            let playerSize = (self.playerImageView!.frameWidth() > self.playerImageView!.frameHeight()) ? self.playerImageView!.frameHeight() : self.playerImageView!.frameWidth()
+            let imageMaxSize = self.frameWidth() - 2 * 24
+            let imageSize = image.size.width
+            let imageFinalSize = (imageSize > imageMaxSize) ? imageMaxSize : imageSize
             
-            self.playerImageView?.border(withRadius: Float(playerSize / 2), borderWidth: self.imageBorderSize, borderColor: self.imageBorderColor)
+            self.playerImageView?.border(withRadius: Float(imageFinalSize / 2),
+                                         borderWidth: self.imageBorderSize,
+                                         borderColor: self.imageBorderColor)
+            
+            self.playerImageSize?.constant = imageFinalSize
             }, fail: { [unowned self] error in
                 self.playerImageView?.isHidden = true
         })
