@@ -839,5 +839,6 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     public func playerPause() {
         self.player.pause()
         self.playerPlayPauseButton?.isSelected = true
+        self.playerDispatcher?.dispatcherStop()
     }
 }
