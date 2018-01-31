@@ -155,60 +155,15 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBInspectable public var timerSeek: Int = kPlayerSeekingSeconds
     
     @IBInspectable public var imagePlay: UIImage = UIImage.image(name: "PlayerPlay")
-    
-    @IBInspectable public var imagePause: UIImage = UIImage.image(name: "PlayerPause") {
-        didSet {
-            self.playerPlayPauseButton?.setBackgroundImage(imagePause, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
-        didSet {
-            self.playerSeekForwardButton?.setImage(imageForward, for: UIControlState.selected)
-        }
-    }
-    
-    @IBInspectable public var imageBack: UIImage = UIImage.image(name: "PlayerSeekBackward") {
-        didSet {
-            self.playerSeekBackwardButton?.setImage(imageBack, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imagePrevious: UIImage = UIImage.image(name: "PlayerPrevious") {
-        didSet {
-            self.playerPreviousButton?.setImage(imagePrevious, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imageNext: UIImage = UIImage.image(name: "PlayerNext") {
-        didSet {
-            self.playerNextButton?.setImage(imageNext, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imageShuffle: UIImage = UIImage.image(name: "shuffle") {
-        didSet {
-            self.playerShuffleButton?.setImage(imageShuffle, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imageShuffleSelected: UIImage = UIImage.image(name: "shuffleSelected") {
-        didSet {
-            self.playerShuffleButton?.setImage(imageShuffleSelected, for: UIControlState.selected)
-        }
-    }
-    
-    @IBInspectable public var imageLoop: UIImage = UIImage.image(name: "PlayerLoop") {
-        didSet {
-            self.playerLoopButton?.setImage(imageLoop, for: UIControlState.normal)
-        }
-    }
-    
-    @IBInspectable public var imageLoopSelected: UIImage = UIImage.image(name: "PlayerLoopSelected") {
-        didSet {
-            self.playerLoopButton?.setImage(imageLoopSelected, for: UIControlState.selected)
-        }
-    }
+    @IBInspectable public var imagePause: UIImage = UIImage.image(name: "PlayerPause")
+    @IBInspectable public var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward")
+    @IBInspectable public var imageBack: UIImage = UIImage.image(name: "PlayerSeekBackward")
+    @IBInspectable public var imagePrevious: UIImage = UIImage.image(name: "PlayerPrevious")
+    @IBInspectable public var imageNext: UIImage = UIImage.image(name: "PlayerNext")
+    @IBInspectable public var imageShuffle: UIImage = UIImage.image(name: "shuffle")
+    @IBInspectable public var imageShuffleSelected: UIImage = UIImage.image(name: "shuffleSelected")
+    @IBInspectable public var imageLoop: UIImage = UIImage.image(name: "PlayerLoop")
+    @IBInspectable public var imageLoopSelected: UIImage = UIImage.image(name: "PlayerLoopSelected")
     
     @IBInspectable public var sliderImage: UIImage = UIImage.imageDot(size: kPlayerSliderImageSize, color: UIColor.white) {
         didSet {
@@ -299,7 +254,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.timeSliderSetDefaultImage()
+        self.playerSetControlsImages()
     }
     
     // MARK: - Dispatcher functions.
@@ -562,6 +517,20 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     // MARK: - Time slider functions.
+    private func playerSetControlsImages() {
+        self.playerPlayPauseButton?.setBackgroundImage(self.imagePause, for: UIControlState.normal)
+        self.playerSeekForwardButton?.setImage(self.imageForward, for: UIControlState.normal)
+        self.playerSeekBackwardButton?.setImage(self.imageBack, for: UIControlState.normal)
+        self.playerPreviousButton?.setImage(self.imagePrevious, for: UIControlState.normal)
+        self.playerNextButton?.setImage(self.imageNext, for: UIControlState.normal)
+        self.playerShuffleButton?.setImage(self.imageShuffle, for: UIControlState.normal)
+        self.playerShuffleButton?.setImage(self.imageShuffleSelected, for: UIControlState.selected)
+        self.playerLoopButton?.setImage(self.imageLoop, for: UIControlState.normal)
+        self.playerLoopButton?.setImage(self.imageLoopSelected, for: UIControlState.selected)
+        
+        self.timeSliderSetDefaultImage()
+    }
+    
     private func timeSliderSetDefaultImage() {
         if self.playerTimeSliderHasCustomImage {
             self.playerTimeSlider?.setThumbImage(self.sliderImage, for: UIControlState.normal)
