@@ -164,7 +164,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     
     @IBInspectable public var imageForward: UIImage = UIImage.image(name: "PlayerSeekForward") {
         didSet {
-            self.playerPlayPauseButton?.setBackgroundImage(imageForward, for: UIControlState.selected)
+            self.playerSeekForwardButton?.setImage(imageForward, for: UIControlState.selected)
         }
     }
     
