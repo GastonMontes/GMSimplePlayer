@@ -519,6 +519,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     // MARK: - Time slider functions.
     private func playerSetControlsImages() {
         self.playerPlayPauseButton?.setBackgroundImage(self.imagePause, for: UIControlState.normal)
+        self.playerPlayPauseButton?.setBackgroundImage(self.imagePlay, for: UIControlState.selected)
         self.playerSeekForwardButton?.setImage(self.imageForward, for: UIControlState.normal)
         self.playerSeekBackwardButton?.setImage(self.imageBack, for: UIControlState.normal)
         self.playerPreviousButton?.setImage(self.imagePrevious, for: UIControlState.normal)
