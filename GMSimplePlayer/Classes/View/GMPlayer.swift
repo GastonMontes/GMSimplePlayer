@@ -73,6 +73,7 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     @IBOutlet private var playerDurationTimeLabel: UILabel?
     
     @IBOutlet private var playerTimeSlider: UISlider?
+    @IBOutlet private var playerTimeSliderHeight: NSLayoutConstraint?
     
     @IBOutlet private var playerImageView: UIImageView?
     @IBOutlet private var playerImageSize: NSLayoutConstraint?
@@ -172,6 +173,16 @@ private let kPlayerBottomVideoHeightConstraint = CGFloat(88)
     }
     
     @IBInspectable public var sliderSize: Float = kPlayerSliderImageSize
+    @IBInspectable public var sliderHide: Bool = false {
+        didSet {
+            if sliderHide == true {
+                self.playerTimeSliderHeight?.constant = 0
+                self.playerTimeSlider?.isHidden = true
+                self.playerDurationTimeLabel?.isHidden = true
+                self.playerCurrentTimeLabel?.isHidden = true
+            }
+        }
+    }
     
     @IBInspectable public var barsHidden: Bool = false {
         didSet {
